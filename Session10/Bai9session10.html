@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      li{
+        list-style: none;
+      }
+      .container {
+      }
+      .header {
+        height: 56px;
+        background-color: antiquewhite;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 48px;
+      }
+      .header-left {
+      }
+      .header-right {
+      }
+      .main-content {
+      }
+      .list-product {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 48px;
+      }
+      .product-item {
+        border: 1px solid black;
+        flex-basis: calc(25% - 12px);
+        flex-grow: 1;
+        flex-shrink: 1;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <ul class="header-left">
+          <li>Header left</li>
+        </ul>
+        <ul class="header-right">
+          <li>Header right</li>
+        </ul>
+      </header>
+      <main class="main-content">
+        <ul class="list-product">
+          <li class="product-item">Product 1</li>
+          <li class="product-item">Product 2</li>
+          <li class="product-item">Product 3</li>
+          <li class="product-item">Product 4</li>
+          <li class="product-item">Product 5</li>
+          <li class="product-item">Product 6</li>
+          <li class="product-item">Product 7</li>
+          <li class="product-item">Product 8</li>
+        </ul>
+      </main>
+    </div>
+  </body>
+</html>

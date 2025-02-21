@@ -1,0 +1,148 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .list {
+    display: none;
+  }
+  .main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+    color: white;
+    font-size: 30px;
+  }
+  .block1 {
+    flex: 1;
+    display: flex;
+    gap: 12px;
+  }
+  .logo {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav {
+    flex: 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .block2 {
+    flex: 8;
+    display: flex;
+    gap: 12px;
+  }
+  .content {
+    flex: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .aside {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .block3 {
+    flex: 6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .column {
+    width: calc((100% / 3) - 8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .block1 *,
+  .block2 *,
+  .block3 * {
+    background-color: rgb(160, 67, 67);
+  }
+  .logo {
+    background-color: white;
+  }
+  #h1 {
+    background-color: white;
+    color: rgb(160, 67, 67);
+  }
+  @media screen and (max-width: 1199px) {
+    .block1 {
+      flex: 1;
+    }
+    .block2 {
+      flex: 6;
+      flex-direction: column;
+    }
+    .block3 {
+      flex: 3;
+    }
+    .column {
+      width: calc(50% - 6px);
+    }
+    .tablet {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .nav {
+      display: none;
+    }
+    .list {
+      display: inline;
+      flex: 1;
+      position: relative;
+      top: 20px;
+    }
+    .logo {
+      flex: 9;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .block3 {
+      display: none;
+    }
+    .aside {
+      display: none;
+    }
+    .nav {
+      flex: none;
+      display: block;
+      width: 100%;
+      height: 65%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .block1 {
+      flex-wrap: wrap;
+      flex: 4;
+    }
+    .block2 {
+      flex: 6;
+    }
+    .logo {
+      height: 30%;
+      flex: 8;
+    }
+    .list {
+      height: 30%;
+      flex: 2;
+      top: 0px;
+    }
+    .content {
+      margin: 10px;
+      margin-bottom: 0px;
+    }
+    main {
+      justify-content: space-between;
+    }
+  }

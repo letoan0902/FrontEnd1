@@ -1,0 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .accordion {
+    margin: 15px;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+  
+  .item {
+    padding: 15px;
+    position: relative;
+  }
+  
+  .icon {
+    position: absolute;
+    left: 97%;
+  }
+  
+  #active {
+    background-color: #d0e2ff;
+    color: rgb(57, 57, 163);
+  }
+  
+  .body {
+    margin: 15px;
+  }
+  
+  .highlight {
+    color: rgb(246, 47, 140);
+  }
+  

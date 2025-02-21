@@ -1,0 +1,33 @@
+.editor {
+    width: 400px;
+}
+
+.editor-img {
+    width: 50px;
+    height: 50px;
+}
+
+.editor-title {
+    display: inline;
+    position: relative;
+    bottom: 15px;
+    margin-left: 10px;
+}
+
+.featured-img {
+    width: 400px;
+    height: 300px;
+}
+
+.featured-title {
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+.music-label {
+    color: rgb(65, 65, 132);
+}
+
+.description {
+    color: rgb(107, 105, 105);
+}

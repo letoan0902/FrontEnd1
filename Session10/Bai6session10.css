@@ -1,0 +1,71 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  img {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+  }
+  .main {
+    margin: 20px;
+    width: 60%;
+  }
+  .football {
+    width: 80px;
+    height: 25px;
+    background: none;
+    color: white;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 1px solid white;
+    border-radius: 2px;
+  }
+  .text {
+    font-size: 9px;
+    width: 400px;
+    color: white;
+    position: absolute;
+    top: 200px;
+    left: 20px;
+  }
+  .image {
+    position: relative;
+  }
+  .card1,
+  .card2 {
+    border: none;
+    border-radius: 3px;
+    width: 40px;
+    height: 30px;
+    color: white;
+    font-size: 20px;
+  }
+  .card1 {
+    background-color: rgb(157, 154, 154);
+  }
+  .card2 {
+    background-color: black;
+  }
+  .number {
+    background: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(227, 224, 224);
+    color: gray;
+  }
+  #number1 {
+    background-color: black;
+    color: white;
+  }
+  .type {
+    margin-top: 20px;
+    margin-left: 65%;
+    display: flex;
+    width: 250px;
+    justify-content: space-evenly;
+  }

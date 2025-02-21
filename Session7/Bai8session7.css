@@ -1,0 +1,117 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#main {
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 20px;
+  width: 280px;
+}
+
+h4 {
+  margin: 15px;
+}
+
+#inactive {
+  background-color: #ffeeca;
+  border: 1px solid #ffce88;
+  color: #c0430e;
+  border-radius: 5px;
+  height: 15px;
+  width: 70px;
+  font-size: 10px;
+  font-weight: 550;
+  text-align: center;
+  padding-top: 1px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.infomations {
+  margin-left: 15px;
+  color: #313749;
+}
+
+#client {
+  position: relative;
+  bottom: 5px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+#progress {
+  color: #525b75;
+  margin-left: 15px;
+}
+
+#percent {
+  margin-left: 58%;
+}
+
+#bprogress {
+  background-color: #ffeeca;
+  width: 250px;
+  height: 3px;
+  border-radius: 3px;
+  margin-left: 15px;
+  margin-top: 7px;
+}
+
+#cbprogress {
+  background-color: #e57809;
+  width: 190px;
+  height: 3px;
+  border-radius: 3px;
+}
+
+#started {
+  position: relative;
+  bottom: 5px;
+}
+
+.img {
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#img2 {
+  position: relative;
+  right: 30px;
+}
+
+#list {
+  position: relative;
+  left: 70px;
+  top: -15px;
+}
+
+.highlight {
+  color: #3774ff;
+}
+
+.amount {
+  color: #141824;
+}
+
+.date {
+  color: #525b75;
+}
+
+.list-icon {
+  margin-right: 5px;
+  width: 23px;
+  height: 23px;
+  position: relative;
+  top: 7px;
+}
+
+.task-text {
+  color: #525b75;
+}

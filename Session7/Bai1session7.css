@@ -1,0 +1,23 @@
+* {
+    color: #231751;
+  }
+  
+  span {
+    position: relative;
+    bottom: 6px;
+  }
+  
+  .consult {
+    border: none;
+    background-color: #bc2229;
+    color: white;
+    border-radius: 5px;
+    height: 25px;
+  }
+  
+  .check {
+    border-radius: 5px;
+    height: 25px;
+    border: 1px solid gray;
+  }
+  

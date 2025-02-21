@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .child {
+    background-color: rgb(95, 135, 237);
+    border-radius: 2px;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    
+  }
+  .parents {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 627px;
+    padding: 5px;
+    margin: 30px;
+    border: 1px solid black;
+  }
+  #col{
+    flex: 2;
+  }

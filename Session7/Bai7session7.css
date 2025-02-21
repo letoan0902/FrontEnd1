@@ -1,0 +1,59 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    border: 1px solid gray;
+    border-radius: 10px;
+    width: 300px;
+    margin: 50px;
+    position: relative;
+}
+
+.title {
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.icon {
+    position: fixed;
+    top: 60px;
+    left: 320px;
+}
+
+.label {
+    margin-left: 10px;
+    position: relative;
+    bottom: 5px;
+}
+
+.input, .textarea {
+    width: 270px;
+    margin-left: 10px;
+}
+
+.divider {
+    margin-bottom: 10px;
+}
+
+.button {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    position: relative;
+    left: 130px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#button1 {
+    background-color: gray;
+}
+
+#button2 {
+    background-color: #0d6efd;
+    margin-left: 5px;
+}

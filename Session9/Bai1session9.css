@@ -1,0 +1,27 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: gray;
+  }
+  .parents{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+  }
+  .child{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(159, 159, 251);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  p{
+    color: black;
+    font-weight: 550;
+  }

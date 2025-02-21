@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Billing address</h2>
+    <form action="">
+      <table>
+        <tr>
+          <td>
+            <label for="fname">First Name</label>
+            <br />
+            <input type="text" id="fname" />
+          </td>
+          <td>
+            <label for="lname">Last Name</label>
+            <br />
+            <input type="text" id="lname" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <label for="username">Username</label>
+      <br />
+      <div style="display: flex">
+        <button>@</button>
+        <input type="text" id="username" placeholder="Username" />
+      </div>
+      <br />
+      <label for="email"
+        >Email <span style="color: gray">(Optional)</span></label
+      >
+      <br />
+      <input type="email" id="email" placeholder="you@example.com" />
+      <br />
+      <br />
+      <label for="address">Address</label>
+      <br />
+      <input type="text" id="address" placeholder="1234 Main St" />
+      <br />
+      <br />
+      <label for="address2"
+        >Address 2 <span style="color: gray">(Optional)</span></label
+      >
+      <br />
+      <input type="text" id="address2" placeholder="Apartment or suite" />
+      <br />
+      <br />
+      <table>
+        <tr>
+          <td>
+            <label for="country">Country</label>
+            <br />
+            <select name="country" id="country">
+              <option value="Choose">Choose...</option>
+            </select>
+          </td>
+          <td>
+            <label for="State">State</label>
+            <br />
+            <select name="State" id="State">
+              <option value="Choose">Choose...</option>
+            </select>
+          </td>
+          <td>
+            <label for="Zip">Zip</label>
+            <br />
+            <input type="text" id="Zip" style="width: 100px; height: 11px" />
+          </td>
+        </tr>
+      </table>
+      <hr />
+      <input type="checkbox" name="checkbox" id="checkbox" />
+      <label for="checkbox"
+        >Shipping address is the same as my billing address</label
+      >
+      <br />
+      <input type="checkbox" name="checkbox" id="checkbox2" />
+      <label for="checkbox2">Save this information for next time</label>
+      <hr />
+      <h2>Payment</h2>
+      <input type="radio" name="radio" id="credit" />
+      <label for="credit">Credit card</label>
+      <br />
+      <input type="radio" name="radio" id="debit" />
+      <label for="debit">Debit card</label>
+      <br />
+      <input type="radio" name="radio" id="paypal" />
+      <label for="paypal">Paypal</label>
+      <br />
+      <br />
+      <table>
+        <tr>
+          <td>
+            <label for="cname">Name on card</label>
+            <br />
+            <input type="text" id="cname" />
+          </td>
+          <td>
+            <label for="cnumber">Credit card number</label>
+            <br />
+            <input type="number" id="cnumber" />
+          </td>
+        </tr>
+      </table>
+      <span style="font-size: 10px; color: gray; position: relative; top: -5px"
+        >Full name as displayed on card</span
+      >
+      <br />
+      <table>
+        <tr>
+          <td>
+            <label for="expiration">Expiration</label>
+            <br />
+            <input type="text" id="expiration" style="width: 80px" />
+          </td>
+          <td>
+            <label for="ccv">CCV</label>
+            <br />
+            <input type="number" id="ccv" style="width: 75px" />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <hr />
+      <br />
+    </form>
+    <button
+      style="
+        width: 70%;
+        height: 30px;
+        background-color: rgb(12 108 247);
+        color: white;
+        border-radius: 3px;
+        border: none;
+      "
+    >
+      Continue to checkout
+    </button>
+  </body>
+</html>

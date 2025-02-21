@@ -1,0 +1,11 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+h1 {
+    background-color: black;
+    color: white;
+}
+#b {
+    font-weight: 900;
+}

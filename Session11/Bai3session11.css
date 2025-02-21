@@ -1,0 +1,85 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .main {
+    padding: 20px 20px 0px 20px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .block1 {
+    flex: 3;
+    background-color: rgb(119, 21, 58);
+  }
+  .block2 {
+    flex: 1;
+    display: flex;
+    gap: 15px;
+  }
+  .block2-child {
+    flex: 1;
+    background-color: rgb(205, 46, 128);
+  }
+  .block3 {
+    display: flex;
+    flex: 2;
+    gap: 15px;
+  }
+  .block3-child {
+    flex: 1;
+    background-color: rgb(231, 93, 168);
+  }
+  .block4 {
+    flex: 1;
+    background-color: pink;
+  }
+  @media screen and (max-width: 1199px) {
+    .block4 {
+      display: none;
+    }
+    .block2 {
+      flex: 3;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .block2-child {
+      flex: none;
+      background-color: rgb(205, 46, 128);
+      width: calc(50% - 10px);
+      height: calc(50% - 10px);
+    }
+    #child-right {
+      display: none;
+    }
+    .main {
+      padding: 20px;
+    }
+    .block1 {
+      flex: 2;
+    }
+    .block3 {
+      flex: 2;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .block2-child {
+      width: calc(100%);
+      height: calc(25% - 10px);
+    }
+    .block1 {
+      flex: 4;
+    }
+
+    .block2 {
+      flex: 10;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .block3 {
+      flex: 3;
+    }
+  }

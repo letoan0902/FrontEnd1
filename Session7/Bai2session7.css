@@ -1,0 +1,26 @@
+table {
+    table-layout: fixed;
+    width: 100%;
+    background-color: rgb(245 244 248);
+}
+
+div {
+    border-radius: 5px;
+    border: 1px solid gray;
+    text-align: center;
+    height: 100%;
+    background-color: white;
+}
+
+td {
+    width: 25%;
+    height: 150px;
+}
+
+h3 {
+    color: rgb(188 34 41);
+}
+
+p {
+    color: rgb(41 28 86);
+}

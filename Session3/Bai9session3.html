@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="https://baiform.com" method="get">
+      <table>
+        <tr>
+          <td><label for="name">Họ và tên:</label></td>
+          <td><input type="text" id="name" /></td>
+        </tr>
+        <tr>
+          <td><label for="born">Ngày sinh:</label></td>
+          <td><input type="date" id="born" /></td>
+        </tr>
+        <tr>
+          <td><label for="sex">Giới tính:</label></td>
+          <td>
+            <label><input type="radio" value="Nam" name="sex" />Nam</label>
+            <label><input type="radio" value="Nữ" name="sex" />Nữ</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="telephone">Số điện thoại:</label></td>
+          <td><input type="tel" id="telephone" /></td>
+        </tr>
+        <tr>
+          <td><label for="email">Email:</label></td>
+          <td><input type="email" id="email" /></td>
+        </tr>
+        <tr>
+          <td><label for="address">Địa chỉ:</label></td>
+          <td>
+            <textarea name="address" id="address"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="team">Vai trò trong nhóm:</label></td>
+          <td>
+            <select name="team" id="team">
+              <option value="Thành viên">Thành viên</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="interest">Sở thích:</label></td>
+          <td><input type="text" id="interest" /></td>
+        </tr>
+        <tr>
+          <td>
+            <label for="skill">Kỹ năng:</label>
+          </td>
+          <td>
+            <textarea name="skill" id="skill"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="type">Thời gian rảnh:</label></td>
+          <td>
+            <label
+              ><input type="checkbox" value="Sáng" name="type" />Sáng</label
+            >
+            <label
+              ><input type="checkbox" value="Chiều" name="type" />Chiều</label
+            >
+            <label><input type="checkbox" value="Tối" name="type" />Tối</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="reason">Lý do tham gia nhóm:</label>
+          </td>
+          <td>
+            <textarea name="reason" id="reason"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="color">Màu yêu thích:</label></td>
+          <td><input type="color" id="color" /></td>
+        </tr>
+        <tr>
+          <td><label for="yes">Đăng ký nhận bản tin:</label></td>
+          <td>
+            <label><input type="checkbox" value="Yes" name="yes" />Có</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="receive">Nhận thông báo qua email:</label></td>
+          <td>
+            <label
+              ><input type="radio" value="Email" name="receive" />Email</label
+            >
+            <label><input type="radio" value="SMS" name="receive" />SMS</label>
+          </td>
+        </tr>
+        <tr>
+          <td><button>Đăng ký thành viên</button></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

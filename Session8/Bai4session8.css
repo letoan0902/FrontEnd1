@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  h4 {
+    border-bottom: 2px solid rgb(255, 153, 0);
+    width: 120px;
+    padding-bottom: 10px;
+    margin-left: 20px;
+  }
+  div {
+    margin: 30px;
+  }
+  p {
+    margin-top: 10px;
+    line-height: 15px;
+    font-size: 10px;
+    color: gray;
+    width: 85%;
+  }
+  td {
+    width: 300px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+  }
+  .image {
+    width: 130px;
+    height: 100px;
+  }

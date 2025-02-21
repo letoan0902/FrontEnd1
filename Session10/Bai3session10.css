@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  #img1 {
+    width: 100%;
+    border-radius: 10px;
+    height: 300px;
+  }
+  #img2 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  div {
+    margin: 30px;
+    width: 30%;
+  }
+  button {
+    color: white;
+    border: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    position: relative;
+    top: 50px;
+    left: 70%;
+    background: none;
+  }
+  span {
+    margin-left: 20px;
+    position: relative;
+    bottom: 10px;
+  }
+  p {
+    color: rgb(105, 105, 105);
+  }

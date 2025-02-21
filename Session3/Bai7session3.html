@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="https://baiform.com" method="get">
+      <table>
+        <tr>
+          <td><label for="name">Họ và tên:</label></td>
+          <td><input type="text" id="name" /></td>
+        </tr>
+        <tr>
+          <td><label for="email">Email:</label></td>
+          <td><input type="email" id="email" /></td>
+        </tr>
+        <tr>
+          <td><label for="born">Ngày sinh:</label></td>
+          <td><input type="date" id="born" /></td>
+        </tr>
+        <tr>
+          <td><label for="sex">Giới tính:</label></td>
+          <td>
+            <label><input type="radio" value="Nam" name="sex" />Nam</label>
+            <label><input type="radio" value="Nữ" name="sex" />Nữ</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="telephone">Số điện thoại:</label></td>
+          <td><input type="tel" id="telephone" /></td>
+        </tr>
+        <tr>
+          <td><label for="major">Chuyên ngành:</label></td>
+          <td><input type="text" id="major" /></td>
+        </tr>
+        <tr>
+          <td><label for="year">Năm nhập học:</label></td>
+          <td><input type="number" id="year" min="1" max="2025" /></td>
+        </tr>
+        <tr>
+          <td><label for="gpa">Điểm GPA:</label></td>
+          <td><input type="number" id="gpa" min="0" max="4" step="any" /></td>
+        </tr>
+        <tr>
+          <td><label for="address">Địa chỉ:</label></td>
+          <td><textarea name="address" id="address"></textarea></td>
+        </tr>
+        <tr>
+          <td><label for="class">Lớp học:</label></td>
+          <td>
+            <select name="class" id="class">
+              <option value="Lớp 1">Lớp 1</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="date">Ngày đăng ký học:</label></td>
+          <td><input type="datetime-local" name="date" /></td>
+        </tr>
+        <tr>
+          <td><button>Gửi thông tin</button></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
