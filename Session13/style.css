@@ -1,0 +1,143 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  .icons-logo {
+    width: 185px;
+    height: 41px;
+  }
+  .header-icons {
+    width: 28px;
+    height: 28px;
+  }
+  .link {
+    text-decoration: none;
+    color: black;
+  }
+  .header-div {
+    display: flex;
+    justify-content: space-between;
+    margin: 29px 100px 30px 54px;
+    align-items: center;
+  }
+  .link-margin {
+    margin-right: 75px;
+  }
+  .link2-margin {
+    margin-right: 45px;
+  }
+  .nap-links {
+    font-size: 16px;
+  }
+  .img-banner {
+    width: 1440px;
+    height: 716.83px;
+    margin: 0 auto;
+  }
+  .banner {
+    margin: 0 auto;
+    width: 1440px;
+    height: 716.83px;
+    position: relative;
+  }
+  .background-small {
+    width: 643px;
+    height: 443px;
+    border-radius: 10px;
+    background-color: #fff3e3;
+    position: absolute;
+    top: 153px;
+    right: 58px;
+    padding: 62px 43px 37px 39px;
+  }
+  .background-banner {
+    width: 643px;
+    height: 443px;
+    position: relative;
+  }
+  .text-banner {
+    width: 561px;
+    height: 344px;
+    position: absolute;
+  }
+  .text1-banner {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #333333;
+    padding-bottom: 4px;
+    letter-spacing: 3px;
+  }
+  .text2-banner {
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 65px;
+    color: #b88e2f;
+  }
+  .text3-banner {
+    width: 546px;
+    height: 52px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #333333;
+    margin-top: 17px;
+  }
+  .button-banner {
+    width: 222px;
+    height: 74px;
+    padding: 25px 72px 25px 72px;
+    border: none;
+    background-color: #b88e2f;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    margin-top: 46px;
+  }
+  .browse {
+    margin: 56.47px 126px 0px 131px;
+    display: flex;
+    flex-direction: column;
+    gap: 62.29px;
+    align-items: center;
+  }
+  .image-browse {
+    display: flex;
+    gap: 20px;
+  }
+  .image-div {
+    width: 381px;
+    height: 480px;
+  }
+  .text-browse {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .text1-browse {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 48px;
+    color: #333333;
+  }
+  .text2-browse {
+    font-size: 20px;
+    font-weight: 400px;
+    line-height: 30px;
+    color: #666666;
+  }
+  .caption-browse {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .product-browse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }

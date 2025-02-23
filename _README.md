@@ -14,6 +14,22 @@ Bootstrap icons
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+Up code len Git 
+
+1.    git remote -v                                                     (kiểm tra xem đúng link trên github không)
+2.    git remote remove origin                                          (Nếu sai link thì xóa bằng lệnh này)
+3.    git remote add origin https://github.com/letoan0902/laptrinhc.git (thêm link mới bằng lệnh này, sau đó quay lại bước 1 kiểm tra đúng chưa)
+4.    git push -u origin main                                           (đẩy tất cả code lên bằng lệnh này)
+5.    git push --set-upstream origin main                               (nếu lỗi fatal: No configured push destination thì dùng lệnh này)
+5.    git add .                                                         (dùng lệnh này để up code nếu đã sửa code)
+6.    git add --all                                                     (Dùng lệnh này nếu muốn up tất cả các code có trong vs code)
+7.    git commit -m "Cập nhật toàn bộ code mới"                         (Sau đó dùng lệnh này cmt )
+8.    git push origin main                                              (cuối cùng dùng lệnh này)
+
+
+
+
+
 
 Icons Google
 

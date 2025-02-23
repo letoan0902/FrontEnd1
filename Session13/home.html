@@ -1,75 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
-    <style>
-        .icons-logo{
-            width: 185px;
-            height: 41px;
-        }
-        .header{
-            
-        }
-        .header-icons{
-            width: 28px;
-            height: 28px;
-        }
-        .link{
-            text-decoration: none;
-            color: black;
-        }
-        .header-div{
-            display: flex;
-            justify-content: space-between;
-            margin: 29px 100px 30px 54px;
-            align-items: center;
-        }
-        .link-margin{
-            margin-right: 75px;
-        }
-        .nap-links{
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
     <div class="main">
-    <!-- 1. Header -->
-        <header class="header">
-            <div class="header-div">
-                <div class="logo">
-                    <img src="./public/image/logo.png" alt="" class="icons-logo">
-                </div>
-                <nav class="nap-links">
-                    <a href="" class="link link-margin" >Home</a>
-                    <a href="" class="link link-margin">Shop</a>
-                    <a href="" class="link link-margin">About</a>
-                    <a href="" class="link">Contact</a>
-                </nav>
-                <nav class="nap-links">
-                    <a href="" class="link"><img class="header-icons" src="./public/image/user-icons.png" alt=""></a>
-                    <a href="" class="link"><img class="header-icons" src="./public/image/icons_search.png" alt=""></a>
-                    <a href="" class="link"><img class="header-icons" src="./public/image/icons_heart.png" alt=""></a>
-                    <a href="" class="link"><img class="header-icons" src="./public/image/icons-shopping.png" alt=""></a>
-                </nav>
-            </div>
-        </header>
-    <!-- 2. Banner -->
-        <section class="banner">Banner Layout</section>
-    <!-- 3. Browse -->
-        <section class="browse">Browse</section>
-    <!-- 4. Our -->
-        <section class="our-products"></section>
-    <!-- 5. Rooms -->
-        <section class="beautiful-room">Beautiful</section>
-    <!-- 6. FuniroFurniture -->
-        <section class="funiro">FuniroFurniture</section>
-    <!-- 7. Footer -->
-     <section class="footer">Footer Layout</section>
+      <!-- 1. Header -->
+      <header class="header">
+        <div class="header-div">
+          <div class="logo">
+            <img src="./public/image/logo.png" alt="" class="icons-logo" />
+          </div>
+          <nav class="nap-links">
+            <a href="" class="link link-margin">Home</a>
+            <a href="" class="link link-margin">Shop</a>
+            <a href="" class="link link-margin">About</a>
+            <a href="" class="link">Contact</a>
+          </nav>
+          <nav class="nap-links">
+            <a href="" class="link link2-margin"
+              ><img
+                class="header-icons"
+                src="./public/image/user-icons.png"
+                alt=""
+            /></a>
+            <a href="" class="link link2-margin"
+              ><img
+                class="header-icons"
+                src="./public/image/icons_search.png"
+                alt=""
+            /></a>
+            <a href="" class="link link2-margin"
+              ><img
+                class="header-icons"
+                src="./public/image/icons_heart.png"
+                alt=""
+            /></a>
+            <a href="" class="link"
+              ><img
+                class="header-icons"
+                src="./public/image/icons-shopping.png"
+                alt=""
+            /></a>
+          </nav>
+        </div>
+      </header>
+      <!-- 2. Banner -->
+      <section class="banner">
+        <img
+          src="./public/image/background-big-banner.png"
+          alt=""
+          class="img-banner"
+        />
+        <div class="background-small">
+          <div class="text-banner">
+            <p class="text1-banner">New Arrival</p>
+            <p class="text2-banner">
+              Discover Our <br />
+              New Collection
+            </p>
+            <p class="text3-banner">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime
+              quisquam recusandae vel voluptas
+            </p>
+            <button class="button-banner">BUY NOW</button>
+          </div>
+        </div>
+      </section>
+      <!-- 3. Browse -->
+      <section class="browse">
+        <div class="text-browse">
+          <h2 class="text1-browse">Browse The Range</h2>
+          <p class="text2-browse">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+        </div>
+        <div class="image-browse">
+          <div class="product-browse">
+            <img src="./public/image/dining.png" alt="" class="image-div" />
+            <p class="caption-browse">Dining</p>
+          </div>
+          <div class="product-browse">
+            <img src="./public/image/living.png" alt="" class="image-div" />
+            <p class="caption-browse">Living</p>
+          </div>
+          <div class="product-browse">
+            <img src="./public/image/bedroom.png" alt="" class="image-div" />
+            <p class="caption-browse">Bedroom</p>
+          </div>
+        </div>
+      </section>
     </div>
-    <p>Chao bạn</p>
-</body>
+  </body>
 </html>
