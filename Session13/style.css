@@ -34,7 +34,6 @@
   .img-banner {
     width: 1440px;
     height: 716.83px;
-    margin: 0 auto;
   }
   .banner {
     margin: 0 auto;
@@ -140,4 +139,436 @@
     flex-direction: column;
     align-items: center;
     gap: 30px;
+  }
+
+  .our-products {
+    width: 1236px;
+    height: 1084px;
+    margin: 0 auto;
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .text-products {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    color: #3a3a3a;
+  }
+  .products-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .product {
+    position: relative;
+  }
+  .text-product {
+    width: 285px;
+    height: 145px;
+    background-color: #f4f5f7;
+    padding-top: 16px;
+    padding-bottom: 30px;
+    padding-left: 16px;
+  }
+  .discount {
+    width: 48px;
+    height: 48px;
+    background-color: #e97171;
+    border-radius: 50%;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .image-products {
+    width: 285px;
+    height: 301px;
+  }
+  .text1-products {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28.8px;
+    color: #3a3a3a;
+  }
+  .text2-products {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #898989;
+    margin: 8px 0px;
+  }
+  .text3-products {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #3a3a3a;
+  }
+  .text4-products {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #b0b0b0;
+    text-decoration: line-through;
+    margin-left: 16px;
+  }
+  .new {
+    background-color: #2ec1ac;
+  }
+  .hover {
+    width: 285px;
+    height: 446px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    opacity: 0;
+  }
+  .other-hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .button-hover {
+    width: 202px;
+    height: 48px;
+    background-color: #ffffff;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #b88e2f;
+  }
+  .icon-hover {
+    width: 16px;
+    height: 16px;
+  }
+  .text-hover {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    margin-left: 2px;
+  }
+  .hover:hover {
+    opacity: 1;
+    transition: opacity 0.3s linear;
+  }
+  .button-more-products {
+    width: 245px;
+    height: 48px;
+    border: 1px solid #b88e2f;
+    background: none;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #b88e2f;
+  }
+
+
+  .beautiful-room {
+    width: 1440px;
+    height: 670px;
+    background-color: #FCF8F3;
+    display: flex;
+    align-items: center;
+    margin-top: 69px;
+    margin-bottom: 67px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .text-room {
+    margin-left: 100px;
+    width: 422px;
+  }
+  .text1-room {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    color: #3A3A3A;
+  }
+  .text2-room {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #616161;
+    margin-top: 7px;
+    margin-bottom: 25px;
+  }
+  .button-room {
+    width: 176px;
+    height: 48px;
+    background-color: #B88E2F;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    border: none;
+  }
+  .block2-room {
+    position: relative;
+    width: 404px;
+    height: 582px;
+    margin-left: 42px;
+    margin-right: 24px;
+  }
+  .img-block2 {
+    width: 404px;
+    height: 582px;
+  }
+  .small-block2 {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    width: 217px;
+    height: 130px;
+  }
+  .text-small {
+    background-color: rgba(255, 255, 255, 0.72);
+    padding-left: 32px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .text1-small {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #616161;
+  }
+  .text2-small {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 33.6px;
+    color: #3A3A3A;
+    margin-top: 8px;
+  }
+  .card-next-small {
+    width: 48px;
+    height: 48px;
+    background-color: #B88E2F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: -48px;
+    bottom: 0px;
+  }
+  .next-small {
+    width: 24px;
+    height: 24px;
+  }
+  .block3-room {
+    width: 372px;
+    height: 582px;
+    position: relative;
+  }
+  .img-block3 {
+    width: 372px;
+    height: 486px;
+  }
+  .type-block3 {
+    width: 120px;
+    height: 27px;
+    margin-top: 40px;
+  }
+  .next-block3 {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    right: -24px;
+    top: 267px;
+
+  }
+
+
+
+  .funiro {
+    width: 1440px;
+    height: 780px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+  }
+  .funiro-list {
+    width: 100%;
+    height: 721px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .block1-funiro {
+    width: 545px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .block2-funiro {
+    width: 295px;
+  }
+  .block3-funiro {
+    width: 568px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .block1-funiro {
+  }
+  .img-1-fu {
+    width: 78px;
+    height: 382px;
+    margin-right: 16px;
+  }
+  .img-2-fu {
+    width: 451px;
+    height: 312px;
+    margin-top: 70px;
+  }
+  .img-3-fu {
+    width: 185px;
+    height: 323px;
+    margin-top: 16px;
+    margin-right: 16px;
+  }
+  .img-4-fu {
+    width: 344px;
+    height: 242px;
+    margin-top: 16px;
+  }
+  .img-5-fu {
+    width: 295px;
+    height: 392px;
+  }
+  .img-6-fu {
+    width: 290px;
+    height: 348px;
+    margin-right: 16px;
+    margin-top: 101px;
+  }
+  .img-7-fu {
+    width: 262px;
+    height: 433px;
+    margin-top: 16px;
+  }
+  .img-8-fu {
+    width: 178px;
+    height: 242px;
+    margin: 16px;
+    margin-top: 16px;
+  }
+  .img-9-fu {
+    width: 258px;
+    height: 196px;
+    margin-top: 16px;
+  }
+  .funiro-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .text1-funiro {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #616161;
+  }
+  .text2-funiro {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    color: #3a3a3a;
+  }
+
+
+
+
+
+  .footer {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1440px;
+    height: 505px;
+    padding: 48px 100px 38px 100px;
+    border-top: 1px solid rgba(0, 0, 0, 0.17);
+  }
+  .funiro-footer {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    color: #000000;
+  }
+  .text-footer {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #9f9f9f;
+    margin-top: 50px;
+  }
+
+  .block2-footer {
+    margin-left: 136px;
+    margin-right: 144px;
+  }
+  .card1 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #9f9f9f;
+    margin-bottom: 55px;
+  }
+  .card2 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 46px;
+  }
+  .block3-footer {
+    margin-right: 72px;
+  }
+  .block4-footer {
+  }
+  .subscribe {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+    margin-left: 11px;
+  }
+  .card1-footer {
+    display: flex;
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .card2-footer {
+    padding-top: 35px;
+    padding-bottom: 38px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+  }
+  .input,
+  .subscribe {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+  }
+  .input {
+    width: 200px;
   }
