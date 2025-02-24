@@ -424,8 +424,6 @@
     display: flex;
     flex-wrap: wrap;
   }
-  .block1-funiro {
-  }
   .img-1-fu {
     width: 78px;
     height: 382px;
@@ -541,8 +539,6 @@
   }
   .block3-footer {
     margin-right: 72px;
-  }
-  .block4-footer {
   }
   .subscribe {
     font-weight: 500;
