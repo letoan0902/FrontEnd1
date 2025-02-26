@@ -26,6 +26,12 @@ Up code len Git
 7.    git commit -m "Cập nhật toàn bộ code mới"                         (Sau đó dùng lệnh này cmt )
 8.    git push origin main                                              (cuối cùng dùng lệnh này)
 
+9. Sửa thời gian up code
+10.   set GIT_COMMITTER_DATE="Mon Feb 24 11:30:00 2025 +0700"
+      git commit --amend --no-edit --date="Mon Feb 24 11:30:00 2025 +0700"
+11. sau đó 
+      git push origin main --force
+
 
 
 
