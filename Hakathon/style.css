@@ -306,7 +306,7 @@
   display: none;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 767px) {
   .block2-header {
     display: none;
   }

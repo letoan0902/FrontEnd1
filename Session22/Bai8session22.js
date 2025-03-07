@@ -1,4 +1,4 @@
-let numbers = [1, 8, 3, 1, 9, 1, 7, 5, 5, 2];
+let numbers = [2,5,7,4,1,8,6,2,5,7];
 let number = [];
 for (let i = 0; i < 10; i++) {
     if (numbers.indexOf(i) !== -1) {
@@ -16,3 +16,4 @@ for (let i = 0; i < number.length; i++) {
 let max = Math.max(...count);
 max = count.indexOf(max);
 console.log(number[max]);
+  
