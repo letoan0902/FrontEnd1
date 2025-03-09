@@ -6,16 +6,16 @@ let array = []
 do {
     choice = +prompt(`
         ============= MENU =============
-        1. Nhap so phan tu can nhap va gia tri cac phan tu
-        2. In ra cac gia tri phan tu dang quan ly
-        3. In ra cac phan tu chan, tinh tong va sap xep giam dan
-        4. In ra cac gia tri lon nhat, nho nhat va vi tri cua chung
-        5. In ra cac so nguyen to trong mang va tinh tong
-        6. Nhap 1 so va dem so lan xuat hien trong mang
-        7. Them 1 phan tu vao vi tri chi dinh
-        8. Xoa 1 phan tu theo gia tri
-        9, Sap xep mang theo thu tu tang dan hoac giam dan
-        0. Thoat
+        1. Nhập số phần tử cần nhập và giá trị các phần tử  
+        2. Hiển thị các phần tử đang quản lý  
+        3. Hiển thị các phần tử chẵn, tính tổng và sắp xếp giảm dần  
+        4. Hiển thị giá trị lớn nhất, nhỏ nhất và vị trí của chúng  
+        5. Hiển thị các số nguyên tố trong mảng và tính tổng  
+        6. Nhập một số và đếm số lần xuất hiện trong mảng  
+        7. Thêm một phần tử vào vị trí chỉ định  
+        8. Xóa một phần tử theo giá trị  
+        9. Sắp xếp mảng theo thứ tự tăng dần hoặc giảm dần  
+        0. Thoát  
         ================================
         Lua chon cua ban`)
         switch (choice) {
