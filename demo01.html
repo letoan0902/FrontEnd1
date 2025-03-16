@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chống Sao Chép và Tiện Ích</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .content {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        #alert-box {
+            display: none;
+            background-color: #ff4d4d;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chào mừng bạn đến với trang web chống sao chép!</h1>
+    <div class="content">
+        <p>Đây là một trang web bảo vệ chống sao chép và can thiệp từ tiện ích.</p>
+        <p>Cố gắng sao chép nội dung hoặc can thiệp vào trang sẽ khiến bạn gặp phải các thông báo cảnh báo.</p>
+    </div>
+    <div id="alert-box">Cảnh báo: Bạn đang cố sao chép nội dung hoặc can thiệp vào trang!</div>
+
+    <script>
+        // Phát hiện nếu Tampermonkey hoặc các tiện ích JavaScript can thiệp vào trang
+        function detectTampermonkey() {
+            try {
+                // Kiểm tra xem có sự thay đổi bất thường trong các thuộc tính JavaScript
+                const tampermonkeyDetected = typeof unsafeWindow !== 'undefined' || typeof window.wrappedJSObject !== 'undefined';
+                if (tampermonkeyDetected) {
+                    document.getElementById('alert-box').innerText = 'Cảnh báo: Tiện ích đang can thiệp!';
+                    document.getElementById('alert-box').style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = "about:blank"; // Thoát trang
+                    }, 2000);
+                }
+            } catch (e) {
+                console.error("Không phát hiện được tiện ích Tampermonkey.");
+            }
+        }
+
+        // Phát hiện và chặn hành động sao chép (Ctrl+C, Ctrl+V, chuột phải, ...) 
+        function preventCopyActions(event) {
+            event.preventDefault();
+            document.getElementById('alert-box').innerText = "Cảnh báo: Bạn đang cố sao chép nội dung!";
+            document.getElementById('alert-box').style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = "about:blank"; // Thoát trang sau 2 giây
+            }, 2000);
+        }
+
+        // Chặn các phím tắt sao chép như Ctrl+C, Ctrl+V, Ctrl+X
+        window.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === 'c' || event.key === 'v' || event.key === 'x' || event.key === 'u')) {
+                preventCopyActions(event);
+            }
+        });
+
+        // Chặn hành động sao chép qua menu chuột phải
+        document.addEventListener('contextmenu', function(event) {
+            preventCopyActions(event);
+        });
+
+        // Chặn hành động sao chép qua sự kiện copy
+        document.addEventListener('copy', function(event) {
+            preventCopyActions(event);
+        });
+
+        // Chặn hành động dán (Ctrl+V) qua bàn phím
+        document.addEventListener('paste', function(event) {
+            preventCopyActions(event);
+        });
+
+        // Kiểm tra và phát hiện DevTools hoặc các thay đổi trong DOM
+        function detectDevTools() {
+            const devToolsDetector = setInterval(() => {
+                const threshold = 100;
+                const isDevToolsOpen = window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold;
+                
+                if (isDevToolsOpen) {
+                    document.getElementById('alert-box').innerText = 'Cảnh báo: DevTools đang mở!';
+                    document.getElementById('alert-box').style.display = 'block';
+                    clearInterval(devToolsDetector);  // Dừng kiểm tra khi phát hiện
+                    setTimeout(() => {
+                        window.location.href = "about:blank"; // Thoát trang sau 2 giây
+                    }, 2000);
+                }
+            }, 1000);
+        }
+
+        // Gọi các hàm phát hiện khi trang được tải
+        window.onload = function() {
+            detectTampermonkey();
+            detectDevTools();
+        };
+    </script>
+</body>
+</html>
