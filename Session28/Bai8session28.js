@@ -77,6 +77,7 @@ do {
       searchEmployee(searchName);
       break;
     case "5":
+
       break;
     default:
       alert("Chức năng không hợp lệ, vui lòng chọn lại.");
