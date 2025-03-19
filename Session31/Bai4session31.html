@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .background-opacity{
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0px;
+        }
+        .display{
+            display: none;
+        }
+        .modal{
+            background-color: white;
+            border-radius: 10px;
+            width: 500px;
+            height: 70px;
+            padding: 7px;
+            display: flex;
+            flex-direction: column;
+        }
+        .close{
+            width: 20px;
+            height: 20px;
+            padding-right: 20px;
+            position: relative;
+            left: 93%;
+            margin-top: 6px;
+            cursor: pointer;
+        }
+        .text{
+            padding-left: 10px;
+            margin-top:5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Modal Example</h1>
+    <button id="button">Open Modal</button>
+    <div class="background-opacity display">
+        <div class="modal">
+            <span class="close" >X</span>
+            <p class="text">Some text in the Modal</p>
+        </div>
+    </div>
+    <script src="./Bai4session31.js"></script>
+</body>
+</html>
