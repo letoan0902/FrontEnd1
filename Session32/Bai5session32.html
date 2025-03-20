@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        #body, #table{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #input{
+            width: 250px;
+            height: 30px;
+            padding-left: 10px;
+        }
+        #add{
+            cursor: pointer;
+            width: 50px;
+            height: 35px;
+            color: white;
+            background-color: rgb(38, 155, 38);
+            border: none;
+            border-radius: 5px;
+        }
+        #add:hover{
+            opacity: 0.8;
+        }
+        #table{
+            align-items:first baseline;
+            border-radius: 10px;
+            width: 370px;
+            background-color: white;
+            padding: 20px;
+        }
+        li{
+            margin-top: 10px;
+            width: 350px;
+            list-style: none;
+            border-bottom: 1px solid rgb(216, 216, 216);
+            display: flex;
+        }
+        #ul{
+            padding-left: 10px;
+        }
+        #addIndex{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .text{
+            margin-left: 10px;
+            display: inline-block;
+            width: 90%;
+        }
+        .close{
+            cursor: pointer;
+            position: relative;
+            bottom: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+        .close:hover{
+            background-color: red;
+            color: white;
+        }
+        .display{
+            display: none;
+        }
+    </style>
+</head>
+<body id="main">
+    <div id="body">
+        <h1 id="header">To-Do List K24-PTIT</h1>
+        <div id="table">
+            <div id="addIndex">
+                <input id="input" type="text" placeholder="Nhập nhiệm vụ...">
+                <button id="add">Thêm</button>
+            </div>
+            <ul id="ul">
+            </ul>
+        </div>
+    </div>
+    <script src="./Bai5session32.js"></script>
+</body>
+</html>
