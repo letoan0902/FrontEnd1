@@ -94,12 +94,12 @@ function totalCart(){
         total += price * count;
     });
     document.querySelector(".total").innerHTML = `Tổng: <span id="sum">${total.toLocaleString('vi-VN')}</span>đ`;
+
     let empty = document.getElementById("empty");
-    
-    if(cartItems){
-        empty.style.display ="none";
+    if(total != 0){
+        empty.style.display = "none";
     } else{
-        empty.style.display ="block";
+        empty.style.display = "block";
     }
 }
 
