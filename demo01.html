@@ -1,94 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<style>
-  #main{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.1);
-  }
-  #body, #table{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
-  
-  #input{
-      width: 250px;
-      height: 30px;
-      padding-left: 10px;
-  }
-  #add{
-      cursor: pointer;
-      width: 50px;
-      height: 35px;
-      color: white;
-      background-color: rgb(38, 155, 38);
-      border: none;
-      border-radius: 5px;
-  }
-  #add:hover{
-      opacity: 0.8;
-  }
-  #table{
-      align-items:first baseline;
-      border-radius: 10px;
-      width: 370px;
-      background-color: white;
-      padding: 20px;
-  }
-  li{
-      margin-top: 10px;
-      width: 350px;
-      list-style: none;
-      border-bottom: 1px solid rgb(216, 216, 216);
-      display: flex;
-  }
-  #ul{
-      padding-left: 10px;
-  }
-  #addIndex{
-      margin-left: auto;
-      margin-right: auto;
-  }
-  .text{
-      margin-left: 10px;
-      display: inline-block;
-      width: 90%;
-  }
-  .close{
-      cursor: pointer;
-      position: relative;
-      bottom: 6px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 5px;
-  }
-  .close:hover{
-      background-color: red;
-      color: white;
-  }
-  .display{
-      display: none;
-  }
-</style>
-<body>
-  <div>
-    <ul>
-      <li style="background-color: pink;
-                border-radius: 5px;
-                
-      "><span class="text">Course</span><span class="text">HomeWork</span><span class="close">x</span></li>
-    </ul>
-  </div>
-</body>
+  <head>
+    <title>session33</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 5px;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+      li {
+        list-style: none;
+      }
+      img {
+        width: 200px;
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1
+      style="
+        text-align: center;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+      "
+    >
+      Cửa hàng Đơn giản
+    </h1>
+    <div
+      style="
+        display: flex;
+        gap: 10px;
+        width: 75vw;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
+      <div style="flex: 2">
+        <h2 style="text-align: center; margin-bottom: 20px">Sản phẩm</h2>
+        <div
+          id="product-list"
+          style="display: flex; gap: 10px; flex-wrap: wrap"
+        ></div>
+      </div>
+      <div
+        style="
+          flex: 1;
+          height: max-content;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        "
+      >
+        <h2 style="text-align: center">Giỏ hàng</h2>
+        <div id="cart-list"></div>
+        <div style="text-align: right">
+          <span>Tổng: </span><span id="total-cart" style="margin: 10px"></span>
+        </div>
+        <button
+          onclick="pay()"
+          style="
+            text-align: center;
+            color: white;
+            background-color: blue;
+            margin: 10px;
+            width: calc(100% - 20px);
+            height: 30px;
+            font-size: 20px;
+          "
+        >
+          Thanh toán
+        </button>
+      </div>
+    </div>
+    <script src="./javascript.js"></script>
+  </body>
 </html>

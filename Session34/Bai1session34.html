@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #main{
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: aliceblue;
+            border-radius: 10px;
+        }
+        #header{
+            text-align: center;
+        }
+        .info{
+            width: 300px;
+            height: 35px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            padding-left: 10px;
+            
+        }
+        p{
+            color: rgb(68, 68, 68);
+        }
+        #button{
+            border: none;
+            border-radius: 5px;
+            height: 35px;
+            color: white;
+            cursor: pointer;
+            background-color: rgb(81, 81, 255);
+        }
+    </style>
+</head>
+<body class="body">
+    <div id="main">
+        <h2 id="header">Register</h2>
+        <p>Email:</p>
+        <input type="email" id="email" class="info" placeholder="Enter your email address">
+        <p>Password:</p>
+        <input type="password" id="password" class="info" placeholder="Enter your password">
+        <p>Confirm Password:</p>
+        <input type="password" id="confirmPassword" class="info" placeholder="Enter your confirm password">
+        <button id="button">Register</button>
+    </div>
+    <script src="./Bai1session34.js"></script>
+</body>
+</html>
