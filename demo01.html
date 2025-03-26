@@ -1,83 +1,683 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>session33</title>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng quản lý đầu việc</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        border: none;
-        border-radius: 5px;
-      }
-      button:hover {
-        cursor: pointer;
-      }
-      li {
-        list-style: none;
-      }
-      img {
-        width: 200px;
-        height: 150px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1
-      style="
-        text-align: center;
-        width: 60%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-      "
-    >
-      Cửa hàng Đơn giản
-    </h1>
-    <div
-      style="
-        display: flex;
-        gap: 10px;
-        width: 75vw;
-        margin-left: auto;
-        margin-right: auto;
-      "
-    >
-      <div style="flex: 2">
-        <h2 style="text-align: center; margin-bottom: 20px">Sản phẩm</h2>
-        <div
-          id="product-list"
-          style="display: flex; gap: 10px; flex-wrap: wrap"
-        ></div>
-      </div>
-      <div
-        style="
-          flex: 1;
-          height: max-content;
-          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        "
-      >
-        <h2 style="text-align: center">Giỏ hàng</h2>
-        <div id="cart-list"></div>
-        <div style="text-align: right">
-          <span>Tổng: </span><span id="total-cart" style="margin: 10px"></span>
-        </div>
-        <button
-          onclick="pay()"
-          style="
-            text-align: center;
+        :root {
+            --primary-color: #3498db;
+            --danger-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --dark-color: #34495e;
+            --light-color: #ecf0f1;
+            --border-color: #ddd;
+            --text-color: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: var(--primary-color);
             color: white;
-            background-color: blue;
-            margin: 10px;
-            width: calc(100% - 20px);
-            height: 30px;
-            font-size: 20px;
-          "
-        >
-          Thanh toán
-        </button>
-      </div>
+            padding: 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .task-form {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .form-control {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        input, select, button {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .filter-sort {
+            padding: 15px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .filter-control {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .task-list {
+            padding: 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .task-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s;
+        }
+        
+        .task-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .task-info {
+            flex: 1;
+        }
+        
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .task-details {
+            display: flex;
+            font-size: 13px;
+            color: #666;
+            gap: 15px;
+        }
+        
+        .task-priority {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .high {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--danger-color);
+        }
+        
+        .medium {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .low {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+        }
+        
+        .task-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-edit, .btn-delete {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .btn-edit {
+            background-color: var(--warning-color);
+        }
+        
+        .btn-edit:hover {
+            background-color: #e67e22;
+        }
+        
+        .btn-delete {
+            background-color: var(--danger-color);
+        }
+        
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+        
+        .status-badge {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .pending {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .in-progress {
+            background-color: rgba(52, 152, 219, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .completed {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: modalOpen 0.3s;
+        }
+        
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .close {
+            color: #aaa;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: var(--text-color);
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        .modal-body .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .modal-body label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .btn-cancel {
+            background-color: #95a5a6;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .btn-save {
+            background-color: var(--primary-color);
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        @media (max-width: 600px) {
+            .task-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .task-actions {
+                margin-top: 10px;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ứng dụng quản lý đầu việc</h1>
+        </header>
+        
+        <div class="task-form">
+            <div class="form-control">
+                <input type="text" id="taskName" placeholder="Tên đầu việc...">
+            </div>
+            <div class="form-control">
+                <select id="taskPriority">
+                    <option value="" disabled selected>Ưu tiên</option>
+                    <option value="high">Cao</option>
+                    <option value="medium">Trung bình</option>
+                    <option value="low">Thấp</option>
+                </select>
+            </div>
+            <div class="form-control">
+                <select id="taskStatus">
+                    <option value="" disabled selected>Trạng thái</option>
+                    <option value="pending">Chưa thực hiện</option>
+                    <option value="in-progress">Đang thực hiện</option>
+                    <option value="completed">Đã hoàn thành</option>
+                </select>
+            </div>
+            <div class="form-control">
+                <button id="addTask">Thêm đầu việc</button>
+            </div>
+        </div>
+        
+        <div class="filter-sort">
+            <div class="filter-control">
+                <select id="filterPriority">
+                    <option value="all">Tất cả ưu tiên</option>
+                    <option value="high">Cao</option>
+                    <option value="medium">Trung bình</option>
+                    <option value="low">Thấp</option>
+                </select>
+            </div>
+            <div class="filter-control">
+                <select id="filterStatus">
+                    <option value="all">Tất cả trạng thái</option>
+                    <option value="pending">Chưa thực hiện</option>
+                    <option value="in-progress">Đang thực hiện</option>
+                    <option value="completed">Đã hoàn thành</option>
+                </select>
+            </div>
+            <div class="filter-control">
+                <select id="sortOption">
+                    <option value="created-desc">Mới nhất</option>
+                    <option value="created-asc">Cũ nhất</option>
+                    <option value="name-asc">Tên (A-Z)</option>
+                    <option value="name-desc">Tên (Z-A)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="taskList" class="task-list">
+            <div class="empty-message">Chưa có đầu việc nào. Hãy thêm một đầu việc mới!</div>
+        </div>
     </div>
-    <script src="./javascript.js"></script>
-  </body>
+    
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Chỉnh sửa đầu việc</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editTaskName">Tên đầu việc</label>
+                    <input type="text" id="editTaskName">
+                </div>
+                <div class="form-group">
+                    <label for="editTaskPriority">Ưu tiên</label>
+                    <select id="editTaskPriority">
+                        <option value="high">Cao</option>
+                        <option value="medium">Trung bình</option>
+                        <option value="low">Thấp</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editTaskStatus">Trạng thái</label>
+                    <select id="editTaskStatus">
+                        <option value="pending">Chưa thực hiện</option>
+                        <option value="in-progress">Đang thực hiện</option>
+                        <option value="completed">Đã hoàn thành</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelEdit">Hủy bỏ</button>
+                <button class="btn-save" id="saveEdit">Lưu</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const taskNameInput = document.getElementById('taskName');
+            const taskPrioritySelect = document.getElementById('taskPriority');
+            const taskStatusSelect = document.getElementById('taskStatus');
+            const addTaskButton = document.getElementById('addTask');
+            const taskListElement = document.getElementById('taskList');
+            const filterPrioritySelect = document.getElementById('filterPriority');
+            const filterStatusSelect = document.getElementById('filterStatus');
+            const sortOptionSelect = document.getElementById('sortOption');
+            
+            const editModal = document.getElementById('editModal');
+            const closeModalButton = document.querySelector('.close');
+            const editTaskNameInput = document.getElementById('editTaskName');
+            const editTaskPrioritySelect = document.getElementById('editTaskPriority');
+            const editTaskStatusSelect = document.getElementById('editTaskStatus');
+            const cancelEditButton = document.getElementById('cancelEdit');
+            const saveEditButton = document.getElementById('saveEdit');
+            
+            let tasks = [];
+            let currentEditId = null;
+            
+            function init() {
+                loadTasksFromLocalStorage();
+                renderTasks();
+                setupEventListeners();
+            }
+            
+            function loadTasksFromLocalStorage() {
+                const storedTasks = localStorage.getItem('tasks');
+                if (storedTasks) {
+                    tasks = JSON.parse(storedTasks);
+                } else {
+                    tasks = [
+                        {
+                            id: generateId(),
+                            name: 'Hoàn thành dự án web',
+                            priority: 'high',
+                            status: 'in-progress',
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            id: generateId(),
+                            name: 'Tập thể dục buổi sáng',
+                            priority: 'medium',
+                            status: 'pending',
+                            createdAt: new Date().toISOString()
+                        },
+                        {
+                            id: generateId(),
+                            name: 'Đọc sách mỗi ngày',
+                            priority: 'low',
+                            status: 'completed',
+                            createdAt: new Date().toISOString()
+                        }
+                    ];
+                    saveTasksToLocalStorage();
+                }
+            }
+            
+            function saveTasksToLocalStorage() {
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+            
+            function renderTasks() {
+                let filteredTasks = filterTasks();
+                filteredTasks = sortTasks(filteredTasks);
+                
+                if (filteredTasks.length === 0) {
+                    taskListElement.innerHTML = '<div class="empty-message">Không tìm thấy đầu việc nào phù hợp với bộ lọc.</div>';
+                    return;
+                }
+                
+                taskListElement.innerHTML = '';
+                
+                filteredTasks.forEach(task => {
+                    const taskElement = document.createElement('div');
+                    taskElement.className = 'task-item';
+                    taskElement.innerHTML = `
+                        <div class="task-info">
+                            <div class="task-title">${task.name}</div>
+                            <div class="task-details">
+                                <span class="task-priority ${task.priority}">${getPriorityText(task.priority)}</span>
+                                <span class="status-badge ${task.status}">${getStatusText(task.status)}</span>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn-edit" data-id="${task.id}">Sửa</button>
+                            <button class="btn-delete" data-id="${task.id}">Xóa</button>
+                        </div>
+                    `;
+                    taskListElement.appendChild(taskElement);
+                });
+                
+                addTaskActionListeners();
+            }
+            
+            function filterTasks() {
+                const priorityFilter = filterPrioritySelect.value;
+                const statusFilter = filterStatusSelect.value;
+                
+                return tasks.filter(task => {
+                    const matchesPriority = priorityFilter === 'all' || task.priority === priorityFilter;
+                    const matchesStatus = statusFilter === 'all' || task.status === statusFilter;
+                    return matchesPriority && matchesStatus;
+                });
+            }
+            
+            function sortTasks(tasksToSort) {
+                const sortOption = sortOptionSelect.value;
+                
+                return [...tasksToSort].sort((a, b) => {
+                    switch (sortOption) {
+                        case 'created-asc':
+                            return new Date(a.createdAt) - new Date(b.createdAt);
+                        case 'created-desc':
+                            return new Date(b.createdAt) - new Date(a.createdAt);
+                        case 'name-asc':
+                            return a.name.localeCompare(b.name);
+                        case 'name-desc':
+                            return b.name.localeCompare(a.name);
+                        default:
+                            return 0;
+                    }
+                });
+            }
+            
+            function addTask() {
+                const name = taskNameInput.value.trim();
+                const priority = taskPrioritySelect.value;
+                const status = taskStatusSelect.value;
+                
+                if (!name || !priority || !status) {
+                    alert('Vui lòng nhập đầy đủ thông tin đầu việc!');
+                    return;
+                }
+                
+                const newTask = {
+                    id: generateId(),
+                    name,
+                    priority,
+                    status,
+                    createdAt: new Date().toISOString()
+                };
+                
+                tasks.push(newTask);
+                saveTasksToLocalStorage();
+                renderTasks();
+                
+                taskNameInput.value = '';
+                taskPrioritySelect.selectedIndex = 0;
+                taskStatusSelect.selectedIndex = 0;
+            }
+            
+            function editTask(id) {
+                const task = tasks.find(task => task.id === id);
+                if (!task) return;
+                
+                currentEditId = id;
+                editTaskNameInput.value = task.name;
+                editTaskPrioritySelect.value = task.priority;
+                editTaskStatusSelect.value = task.status;
+                
+                editModal.style.display = 'block';
+            }
+            
+            function updateTask() {
+                if (!currentEditId) return;
+                
+                const name = editTaskNameInput.value.trim();
+                const priority = editTaskPrioritySelect.value;
+                const status = editTaskStatusSelect.value;
+                
+                if (!name || !priority || !status) {
+                    alert('Vui lòng nhập đầy đủ thông tin đầu việc!');
+                    return;
+                }
+                
+                const taskIndex = tasks.findIndex(task => task.id === currentEditId);
+                if (taskIndex === -1) return;
+                
+                tasks[taskIndex] = {
+                    ...tasks[taskIndex],
+                    name,
+                    priority,
+                    status
+                };
+                
+                saveTasksToLocalStorage();
+                renderTasks();
+                closeModal();
+            }
+            
+            function deleteTask(id) {
+                if (confirm('Bạn có chắc chắn muốn xóa đầu việc này?')) {
+                    tasks = tasks.filter(task => task.id !== id);
+                    saveTasksToLocalStorage();
+                    renderTasks();
+                }
+            }
+            
+            function closeModal() {
+                editModal.style.display = 'none';
+                currentEditId = null;
+            }
+            
+            function addTaskActionListeners() {
+                document.querySelectorAll('.btn-edit').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        editTask(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-delete').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        deleteTask(id);
+                    });
+                });
+            }
+            
+            function setupEventListeners() {
+                addTaskButton.addEventListener('click', addTask);
+                
+                filterPrioritySelect.addEventListener('change', renderTasks);
+                filterStatusSelect.addEventListener('change', renderTasks);
+                sortOptionSelect.addEventListener('change', renderTasks);
+                
+                closeModalButton.addEventListener('click', closeModal);
+                cancelEditButton.addEventListener('click', closeModal);
+                saveEditButton.addEventListener('click', updateTask);
+                
+                window.addEventListener('click', function(event) {
+                    if (event.target === editModal) {
+                        closeModal();
+                    }
+                });
+            }
+            
+            function generateId() {
+                return Date.now().toString(36) + Math.random().toString(36).substr(2);
+            }
+            
+            function getPriorityText(priority) {
+                switch (priority) {
+                    case 'high': return 'Cao';
+                    case 'medium': return 'Trung bình';
+                    case 'low': return 'Thấp';
+                    default: return priority;
+                }
+            }
+            
+            function getStatusText(status) {
+                switch (status) {
+                    case 'pending': return 'Chưa thực hiện';
+                    case 'in-progress': return 'Đang thực hiện';
+                    case 'completed': return 'Đã hoàn thành';
+                    default: return status;
+                }
+            }
+            
+            init();
+        });
+    </script>
+</body>
 </html>

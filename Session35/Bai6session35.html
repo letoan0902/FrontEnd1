@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh mục</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        .statusOn{
+            display: inline-block;
+            background-color: rgba(159, 255, 159, 0.3);
+            border-radius: 999px;
+            padding: 3px;
+            color: green;
+            width: 140px;
+            font-weight: 550;
+            font-size: 14px;
+            text-align: center;
+        }
+        .statusOff{
+            display: inline-block;
+            background-color: rgba(255, 195, 199, 0.3);
+            border-radius: 999px;
+            padding: 3px;
+            color: red;
+            width: 140px;
+            font-weight: 550;
+            font-size: 14px;
+            text-align: center;
+        }
+        .statusAdd{
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid mt-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="h3 fw-bold">Danh mục</h1>
+            <button class="btn btn-primary add " data-bs-toggle="modal" data-bs-target="#addCategoryModal">Thêm mới danh mục</button>
+        </div>
+
+
+        <div class="row mb-3">
+            <div class="col-md-3 offset-md-6">
+                <select class="form-select" id="statusFilter">
+                    <option value="all">Tất cả</option>
+                    <option value="statusOn">Đang hoạt động</option>
+                    <option value="statusOff">Ngừng hoạt động</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm theo tên">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                </div>
+            </div>
+        </div>
+
+
+        <table class="table table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th class="col-2">Mã danh mục</th>
+                    <th class="col-5">Tên danh mục</th>
+                    <th class="col-3">Trạng thái</th>
+                    <th class="col-2">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                
+            </tbody>
+        </table>
+    </div>
+
+  <div class="modal fade modalAdd" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Thêm mới danh mục</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addCategoryForm">
+                    <div class="mb-3">
+                        <label for="categoryCode" class="form-label">Mã danh mục</label>
+                        <input type="text" class="form-control " id="categoryCode" placeholder="Mã danh mục">
+                        <div class="invalid-feedback ">
+                            Mã danh mục không được để trống
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Tên danh mục</label>
+                        <input type="text" class="form-control " id="categoryName" placeholder="Tên danh mục">
+                        <div class="invalid-feedback">
+                            Tên danh mục không được để trống
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Trạng thái</label>
+                        <div class="statusAdd">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="active" value="statusOn" checked>
+                                <label class="form-check-label" for="active">
+                                    Đang hoạt động
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="inactive" value="statusOff">
+                                <label class="form-check-label" for="inactive">
+                                    Ngừng hoạt động
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="addButton">Thêm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalEdit" id="editCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Chỉnh sửa danh mục</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addCategoryForm">
+                    <div class="mb-3">
+                        <label for="categoryCode" class="form-label ">Mã danh mục</label>
+                        <input type="text" class="form-control " id="categoryCode" placeholder="Mã danh mục">
+                        <div class="invalid-feedback ">
+                            Mã danh mục không được để trống
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Tên danh mục</label>
+                        <input type="text" class="form-control " id="categoryName" placeholder="Tên danh mục">
+                        <div class="invalid-feedback">
+                            Tên danh mục không được để trống
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Trạng thái</label>
+                        <div class="statusAdd">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="active" value="statusOn" checked>
+                                <label class="form-check-label" for="active">
+                                    Đang hoạt động
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="inactive" value="statusOff">
+                                <label class="form-check-label" for="inactive">
+                                    Ngừng hoạt động
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="editButton">Sửa</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./Bai6session35.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
