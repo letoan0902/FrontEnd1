@@ -1,5 +1,3 @@
-
-
 let products=localStorage.getItem("products");
 if(products){
     products=JSON.parse(products);
@@ -55,12 +53,9 @@ if(products){
             description: 'Tai nghe tiên tiến nhất của Apple với tính năng Chủ Động Khử Tiếng Ồn đẳng cấp Pro',
         }
     ];
-    
 }
 
-
-
-localStorage.setItem("products",JSON.stringify(products));
+localStorage.setItem("products",JSON.stringify(products))
 let list = document.getElementById("list");
 list.innerHTML = '';
 products.forEach(element => {
