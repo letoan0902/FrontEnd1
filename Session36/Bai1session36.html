@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        background-color: rgb(243, 243, 243);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .addName {
+        width: 500px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      .headAdd {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .input {
+        border-radius: 5px;
+        border: 1px solid gray;
+        width: 350px;
+        height: 40px;
+        margin-right: 10px;
+        padding-left: 10px;
+        outline: none;
+        font-size: 18px;
+      }
+      .save {
+        font-size: 16px;
+        background-color: rgb(106, 106, 255);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        height: 40px;
+        width: 70px;
+        cursor: pointer;
+      }
+      .save:hover{
+        opacity: 0.9;
+      }
+      .showName {
+        width: 500px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      .headShow {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .change {
+        font-size: 16px;
+        background-color: rgb(106, 106, 255);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        height: 40px;
+        width: 100px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .change:hover{
+        opacity: 0.9;
+      }
+      .display{
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="addName">
+      <h1 class="headAdd">Nhập tên của bạn</h1>
+      <div class="content">
+        <input type="text" class="input" />
+        <button class="save">Lưu</button>
+      </div>
+    </div>
+    <div class="showName display">
+      <h1 class="headShow"></h1>
+      <button class="change">Đổi tên</button>
+    </div>
+    <script src="./Bai1session36.js"></script>
+  </body>
+</html>

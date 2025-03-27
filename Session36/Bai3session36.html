@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+    button{
+        padding: 20px 30px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        opacity: 0.8;
+        font-size: 16px;
+    }
+    button:hover{
+        opacity: 1;
+    }
+    .main{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+    }
+      .mainButton {
+        display: flex;
+        gap: 30px;
+      }
+      .red {
+        background-color: rgb(255, 0, 0);
+      }
+      .blue {
+        background-color: rgb(80, 164, 255);
+      }
+      .yellow {
+        background-color: rgb(187, 187, 27);
+        color: black;
+      }
+      .violet {
+        background-color: rgb(184, 48, 184);
+      }
+      p{
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1>Chọn màu nền bạn yêu thích</h1>
+      <div class="mainButton">
+        <button class="red">Đỏ</button>
+        <button class="blue">Xanh</button>
+        <button class="yellow">Vàng</button>
+        <button class="violet">Tím</button>
+      </div>
+      <p>Trang sẽ ghi nhớ màu bạn đã chọn kể cả khi tải lại!</p>
+    </div>
+    <script src="./Bai3session36.js"></script>
+  </body>
+</html>

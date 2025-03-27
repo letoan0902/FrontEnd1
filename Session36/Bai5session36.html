@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  padding: 30px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.task-input {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+input[type='text'] {
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.board {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.column {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.column h3 {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.task {
+  background-color: #f9f9f9;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.task p {
+  margin: 0 0 5px 0;
+}
+
+.task button {
+  padding: 5px 10px;
+  font-size: 13px;
+  background-color: #28a745;
+}
+
+.task button:hover {
+  background-color: #218838;
+}
+.work{
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+.textWork{
+    margin: 0px;
+    margin-bottom: 5px;
+}
+.next{
+    height: 30px;
+    background-color: #28a745;
+    display: flex;
+    align-items: center;
+}
+.next:hover{
+  background-color: #218838;
+}
+    </style>
+  </head>
+  <body>
+    <h2>🗂️ Quản lý công việc (Task Board)</h2>
+
+    <div class="task-input">
+      <input type="text" id="taskName" placeholder="Nhập tên công việc..." />
+      <button class="add">Thêm</button>
+    </div>
+
+    <div class="board">
+      <div class="column" id="pendingCol">
+        <h3>🕐 Chờ xử lý</h3>
+        <div id="pendingTasks">
+        </div>
+      </div>
+      <div class="column" id="inProgressCol">
+        <h3>🔨 Đang làm</h3>
+        <div id="inProgressTasks">
+
+        </div>
+      </div>
+      <div class="column" id="doneCol">
+        <h3>✅ Hoàn thành</h3>
+        <div id="doneTasks">
+
+        </div>
+      </div>
+    </div>
+    <script src="./Bai5session36.js"></script>
+  </body>
+</html>
