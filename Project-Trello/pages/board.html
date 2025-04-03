@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/board.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
 
     <style>
       * {
@@ -262,7 +264,11 @@
         width: 16px;
         height: 16px;
       }
-
+      .listYourBoards{
+        overflow-y: auto;
+        height: 385px;
+      }
+      
       .yourBoardInfo {
         padding-left: 14px;
         height: 32px;
@@ -284,7 +290,12 @@
       .btncloseBoard:hover,
       .dateEdit:hover, 
       .labelEdit:hover,
-      .selectModalDetail:hover {
+      .selectModalDetail:hover,
+      .btnCloseMoveCard:hover,
+      .closeCreateLabel:hover, 
+      .returnCreateLabel:hover,
+      .btnCloseModalDate:hover,
+      .btnRemoveModalDate:hover {
         background: rgba(0, 0, 0, 0.16);
         transition: background 0.3s ease;
       }
@@ -295,6 +306,13 @@
         object-fit: cover;
         border-radius: 2px;
         opacity: 0.7;
+      }
+      .backgroundBoardInfo{
+        width: 24px;
+        height: 20px;
+        border-radius: 2px;
+        opacity: 0.7;
+        flex-shrink: 0;
       }
       .textYourBoard {
         width: 100%;
@@ -449,16 +467,19 @@ line-height: 21px;
       }
 
       .headerMainCard {
-        height: 32px;
+        min-height: 32px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 8px;
       }
       .textMainCard {
+        width: 100%;
         margin-left: 12px;
         color: #172b4d;
         font-weight: 600;
         line-height: 20px;
+         white-space: wrap;
       }
       .iconsHeaderMainCard {
         display: flex;
@@ -471,7 +492,7 @@ line-height: 21px;
         cursor: pointer;
       }
       .iconMoreTask {
-        margin: 8px 4px 8px 8px;
+        margin-left: 8px;
         border-radius: 2px;
         cursor: pointer;
         width: 24px;
@@ -1109,6 +1130,512 @@ cursor: pointer;
   }
 
 
+  .modalMove {
+    width: 304px;
+    border-radius: 8px;
+background: #FFF;
+box-shadow: 0px 8px 12px 0px rgba(9, 30, 66, 0.15), 0px 0px 1px 0px rgba(9, 30, 66, 0.31);
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 1003;
+display: none;
+}
+.headerModalMove {
+  height: 48px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.textHeaderMoveCard {
+  color: #44546F;
+font-weight: 600;
+line-height: 40px;
+letter-spacing: -0.042px;
+}
+.btnCloseMoveCard {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  border-radius: 8px;
+  right: 8px;
+  top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.iconCloseMoveCard {
+  width: 16px;
+height: 16px;
+}
+.mainModalMove {
+  padding: 16px 12px 12px 12px;
+}
+.mainModalMove img {
+  width: 24px;
+  height: 24px;
+}
+.textMainMove {
+  color: #44546F;
+font-size: 12px;
+font-weight: 600;
+line-height: 16px;
+margin-bottom: 20px;
+}
+.textBlockMoveCard {
+  color: #172B4D;
+font-weight: 700;
+line-height: 20px;
+margin-bottom: 4px;
+}
+.inputBoardMove {
+height: 40px;
+width: 100%;
+border-radius: 3px;
+border: 1px solid #8590A2;
+background: #FFF;
+padding-left: 9px;
+padding-right: 30px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+margin-bottom: 32px;
+outline: none;
+}
+.inputBoardMove::placeholder{
+  color: #172B4D;
+line-height: 20px;
+
+}
+.moveListMain {
+  display: flex;
+  gap: 9px;
+}
+
+.moveBlockCard {
+  width: 194px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 8px;
+  padding-right: 12px;
+  border-radius: 3px;
+border: 1px solid #8590A2;
+background: #FFF;
+cursor: pointer;
+}
+
+.listMoveCard {
+  width: 100%;
+  border: none;
+  outline: none;
+cursor: pointer;
+}
+
+.positionMoveCard {
+  width: 78px;
+  height: 40px;
+  border-radius: 3px;
+border: 1px solid #8590A2;
+background: #FFF;
+display: flex;
+align-items: center;
+padding-left: 8px;
+position: relative;
+cursor: pointer;
+}
+.textPosition {
+  color: #172B4D;
+line-height: 20px;
+}
+.iconOpenBlockMove{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.btnMoveCard {
+  margin-top: 16px;
+  width: 83px;
+  height: 32px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+background: #0C66E4;
+color: #FFF;
+font-weight: 500;
+line-height: 20px;
+}
+.btnMoveCard:hover, .btnCreateLabel:hover, .btnSaveModalDate:hover, .btnAddCard:hover{
+background: #0a53ba;
+}
+
+
+/* Display Modal Move Card */
+
+.displayModalMoveCard {
+    display: block;
+    animation: slideIn 0.3s ease forwards;
+  }
+
+  .overlayModal2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1002;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .overlayModal2.show {
+    display: block;
+    opacity: 1;
+  }
+
+
+
+  .modalCreateLabel {
+    width: 304px;
+    border-radius: 8px;
+background: #FFF;
+box-shadow: 0px 8px 12px 0px rgba(9, 30, 66, 0.15), 0px 0px 1px 0px rgba(9, 30, 66, 0.31);
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 1003;
+display: none;
+}
+.headerCreateLabel {
+  height: 48px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.headerCreateLabel img {
+  width: 16px;
+height: 16px;
+}
+.returnCreateLabel {
+  display: flex;
+width: 32px;
+height: 32px;
+justify-content: center;
+align-items: center;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.textHeaderCreateLabel {
+  color: #44546F;
+font-weight: 600;
+line-height: 40px;
+letter-spacing: -0.042px;
+}
+
+.closeCreateLabel {
+  display: flex;
+width: 32px;
+height: 32px;
+justify-content: center;
+align-items: center;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.mainCreateLabel {
+  padding: 12px;
+}
+.textMainCreateLabel {
+  color: #44546F;
+font-size: 12px;
+font-weight: 600;
+line-height: 16px;
+}
+.inputTitleLabel {
+  width: 100%;
+  height: 36px;
+  border-radius: 3px;
+background: #FFF;
+box-shadow: 0px 0px 0px 1px #8590A2 inset;
+outline: none;
+border: none;
+padding: 12px;
+margin-top: 8px;
+margin-bottom: 12px;
+}
+.listColorCreateLabel {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  gap: 8px;
+  margin-top: 10px;
+}
+.colorLabel{
+  width: calc(20% - 6.5px);
+  height: 32px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.selectLabel{
+  border: 1px solid gray;
+}
+.colorLabel1 {
+  background: #BAF3DB;
+}
+.colorLabel2 {
+  background: #F8E6A0;
+}
+.colorLabel3 {
+  background: #FEDEC8;
+}
+.colorLabel4 {
+  background: #FFD5D2;
+}
+.colorLabel5 {
+  background: #DFD8FD;
+}
+.colorLabel6 {
+  background: #4BCE97;
+}
+.colorLabel7 {
+  background: #F5CD47;
+}
+.colorLabel8 {
+  background: #FEA362;
+}
+.colorLabel9 {
+  background: #F87168;
+}
+.colorLabel10 {
+  background: #9F8FEF;
+}
+.lineCreateLabel {
+  height: 1px;
+  background: rgba(9, 30, 66, 0.14);
+  margin-top: 18px;
+  margin-bottom: 16px;
+}
+.btnCreateLabel {
+width: 68.04px;
+height: 32px;
+color: #FFF;
+font-weight: 500;
+line-height: 20px;
+border: none;
+border-radius: 3px;
+background: #0C66E4;
+cursor: pointer;
+}
+
+/* Display Modal Create Label */
+.displayModalCreateLabel {
+    display: block;
+    animation: slideIn 0.3s ease forwards;
+  }
+
+.modalDate {
+  border-radius: 8px;
+background: #FFF;
+box-shadow: 0px 8px 12px 0px rgba(9, 30, 66, 0.15), 0px 0px 1px 0px rgba(9, 30, 66, 0.31);
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 1003;
+display: none;
+}
+
+.headerModalDate {
+  width: 100%;
+  position: relative;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.headerModalDate img{
+  width: 16px;
+height: 16px;
+}
+.textHeaderModalDate {
+  color: #44546F;
+font-weight: 600;
+line-height: 40px;
+letter-spacing: -0.042px;
+}
+.btnCloseModalDate {
+  border-radius: 8px;
+  width: 32px;
+height: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+position: absolute;
+top: 8px;
+right: 8px;
+cursor: pointer;
+}
+.mainModalDate {
+  padding: 0px 12px 12px 12px;
+}
+.btnSaveModalDate {
+  width: 100%;
+  height: 32px;
+  border-radius: 3px;
+background: #0C66E4;
+color: #FFF;
+font-weight: 500;
+line-height: 20px;
+margin-top: 8px;
+border: none;
+cursor: pointer;
+}
+.btnRemoveModalDate {
+  width: 100%;
+  height: 32px;
+  border-radius: 3px;
+background: rgba(9, 30, 66, 0.06);
+margin-top: 8px;
+color: #172B4D;
+font-weight: 500;
+line-height: 20px;
+border: none;
+cursor: pointer;
+}
+
+
+
+
+
+.flatpickr-calendar {
+    max-height: 300px;
+}
+
+.flatpickr-month {
+    height: 40px;
+}
+
+.flatpickr-days {
+    height: 240px;
+}
+
+.dateInput {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  margin-bottom: 12px;
+}
+
+
+.dateInput input[type="checkbox"] {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.labelDate {
+  display: block;
+  color: #44546F;
+font-size: 12px;
+font-weight: 700;
+line-height: 16px;
+margin-bottom: 4px;
+}
+.labelStartDate{
+  margin-top: 25px;
+}
+.startDueDate,.dueDate {
+  display: inline-block;
+  border-radius: 3px;
+background: #FFF;
+border: none;
+outline: none;
+box-shadow: 0px 0px 0px 1px #8590A2 inset;
+width: 90px;
+color: #172B4D;
+font-size: 13px;
+line-height: 20px;
+padding-left: 6px;
+height: 32px;
+}
+.dueDate{
+  width: 167px;
+}
+
+.selectYourBoard{
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.addListCard {
+  width: 272px;
+  height: 44px;
+  border-radius: 12px;
+background: #F1F2F4;
+position: relative;
+border-radius: 12px;
+background: #F1F2F4;
+}
+.addListCard img{
+  width: 16px;
+height: 16px;
+}
+.inputAddCard {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: #F1F2F4;
+  border: none;
+  outline: none;
+  padding-left: 36px;
+  padding-right: 56px;
+}
+.inputAddCard::placeholder{
+  color: #172B4D;
+font-weight: 500;
+line-height: 20px;
+}
+.iconAddCard {
+  position: absolute;
+  top: 14px;
+  left: 12px;
+}
+.btnAddCard {
+  position: absolute;
+  width: 44px;
+  height: 32px;
+  right: 6px;
+  top: 6px;
+  cursor: pointer;
+  border-radius: 3px;
+background: #0C66E4;
+color: #FFF;
+font-weight: 500;
+line-height: 20px;
+border: none;
+display: none;
+}
+
+.displayBtnAddCard{
+  display: block;
+}
+.displayIconPlus{
+  display: none;
+}
+
+
     </style>
   </head>
   <body>
@@ -1177,6 +1704,9 @@ cursor: pointer;
           </div>
         </div>
         <div class="lineSidebar"></div>
+
+
+
         <div class="listNavbar listBoardsNavbar">
           <div class="headerYourBoards">
             <span class="textHeaderYourBoard">Your boards</span>
@@ -1190,38 +1720,14 @@ cursor: pointer;
           </div>
           <div class="listYourBoards">
             <div class="yourBoardInfo">
-              <img
+              <div class="backgroundBoardInfo">
+                <img
                 class="backgroundYourBoard"
                 src="../css/data/images/board1.jpg"
                 alt=""
               />
+              </div>
               <span class="textYourBoard">123123213</span>
-            </div>
-            <div class="yourBoardInfo">
-              <img
-                class="backgroundYourBoard"
-                src="../css/data/images/board2.jpg"
-                alt=""
-              />
-              <span class="textYourBoard">42314</span>
-            </div>
-            <div class="yourBoardInfo">
-              <img
-                class="backgroundYourBoard"
-                src="../css/data/images/board3.jpg"
-                alt=""
-              />
-              <span class="textYourBoard">My Trello board</span>
-            </div>
-            <div class="yourBoardInfo">
-              <img
-                class="backgroundYourBoard"
-                src="../css/data/images/board4.jpg"
-                alt=""
-              />
-              <span class="textYourBoard"
-                >Tổ chức sự kiện đón mừng năm mới</span
-              >
             </div>
           </div>
         </div>
@@ -1270,7 +1776,7 @@ cursor: pointer;
         <div class="mainBoard">
           <div class="listMainCard">
             <div class="headerMainCard">
-              <span class="textMainCard">Todo</span>
+              <p class="textMainCard">Todo</p>
               <div class="iconsHeaderMainCard">
                 <img
                   class="collapseMainCard"
@@ -1341,6 +1847,11 @@ cursor: pointer;
                 />
               </div>
             </div>
+          </div>
+          <div class="addListCard">
+            <input type="text" class="inputAddCard" placeholder="Add another list">
+            <img class="iconAddCard" src="../css/data/icons/plus-board.png" alt="">
+            <button class="btnAddCard">Add</button>
           </div>
         </div>
       </div>
@@ -1549,25 +2060,88 @@ cursor: pointer;
     <div class="moveListMain">
       <div class="block1MoveList">
         <h2 class="textBlockMoveCard">List</h2>
-        <div>
-          <span>In-progress</span>
-          <img src="../css/data/icons/open-filter.png" alt="">
+        <div class="moveBlockCard">
+          <!-- <span class="textBlockCurrent">In-progress</span>
+          <img class="iconOpenBlockMove" src="../css/data/icons/open-filter.png" alt=""> -->
+          <select class="listMoveCard">
+            <option class="optionListMove" value="In-progress">In-progress</option>
+          </select>
         </div>
       </div>
-      <div>
+      <div class="block2MoveList">
         <h2 class="textBlockMoveCard">Position</h2>
-        <div>
-          <span>1</span>
-          <img src="../css/data/icons/open-filter.png" alt="">
+        <div class="positionMoveCard">
+          <span class="textPosition">1</span>
+          <img class="iconOpenBlockMove" src="../css/data/icons/open-filter.png" alt="">
         </div>
       </div>
     </div>
-    <button>Move</button>
+    <button class="btnMoveCard">Move</button>
   </div>
 </div>
 
+<div class="modalCreateLabel">
+  <div class="headerCreateLabel">
+    <div class="returnCreateLabel">
+      <img src="../css/data/icons/return-create-label.png" alt="">
+    </div>
+    <span class="textHeaderCreateLabel">Create label</span>
+    <div class="closeCreateLabel">
+      <img src="../css/data/icons/close-modal-move.png" alt="">
+    </div>
+  </div>
+  <div class="mainCreateLabel">
+    <h3 class="textMainCreateLabel">Title</h3>
+    <input class="inputTitleLabel" type="text">
+    <h3  class="textMainCreateLabel">Select a color</h3>
+    <div class="listColorCreateLabel">
+        <div class="colorLabel colorLabel1"></div>
+        <div class="colorLabel colorLabel2"></div>
+        <div class="colorLabel colorLabel3"></div>
+        <div class="colorLabel colorLabel4"></div>
+        <div class="colorLabel colorLabel5"></div>
+        <div class="colorLabel colorLabel6"></div>
+        <div class="colorLabel colorLabel7"></div>
+        <div class="colorLabel colorLabel8"></div>
+        <div class="colorLabel colorLabel9"></div>
+        <div class="colorLabel colorLabel10"></div>
+    </div>
+    <div class="lineCreateLabel"></div>
+    <button class="btnCreateLabel">Create</button>
+  </div>
+</div>
+
+<div class="modalDate">
+  <div class="headerModalDate">
+    <span class="textHeaderModalDate">Dates</span>
+    <div class="btnCloseModalDate">
+      <img src="../css/data/icons/close-modal-move.png" alt="">
+    </div>
+  </div>
+  <div class="mainModalDate">
+      <div class="contentModalDate">
+        <div class="calendarContainer" id="calendar"></div>
+    <label class="labelDate labelStartDate">Start Date</label>
+    <div class="dateInput">
+    <input type="checkbox" id="startDateCheck" checked disabled>
+    <input class="startDueDate" type="text" id="startDate" readonly>
+    </div>
+    <label class="labelDate">Due Date</label>
+<div class="dateInput">
+    <input type="checkbox" id="dueDateCheck">
+    <input class="dueDate" type="text" id="dueDate" readonly placeholder="D/M/YYYY H:mm">
+</div>
+      </div>
+      <button class="btnSaveModalDate">Save</button>
+      <button class="btnRemoveModalDate">Remove</button>
+    </div>
+  </div>
+</div>
+
+
     <div class="overlayModal2"></div>
     <div class="overlayModal"></div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script src="../js/validation.js"></script>
     <script src="../js/board.js"></script>

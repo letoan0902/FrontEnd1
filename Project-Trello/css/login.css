@@ -233,7 +233,7 @@
     border-radius: 10px;
     background: #e5fff0;
     position: fixed;
-    top: 22px; /* 148px */
+    top: 22px;
     left: 26px;
     display: none;
   }
