@@ -49,9 +49,36 @@ if(users){
 };
 
 
+let idNewTask = localStorage.getItem("idNewTask");
+if(idNewTask){
+    idNewTask=JSON.parse(idNewTask);
+} else {
+    idNewTask = 301;
+}
+
+
+let idNewList = localStorage.getItem("idNewList");
+if(idNewList){
+    idNewList=JSON.parse(idNewList);
+} else {
+    idNewList = 201;
+}
+
+let idNewBoard = localStorage.getItem("idNewBoard");
+if(idNewBoard){
+    idNewBoard=JSON.parse(idNewBoard);
+} else {
+    idNewBoard = 101;
+}
+
 let user = localStorage.getItem("user");
 if(user){
     user=JSON.parse(user);
+} else {
+    let currentPath = window.location.pathname;
+    if (currentPath !== "/Project-Trello/pages/signup.html" && currentPath !== "/Project-Trello/pages/login.html") {
+        window.location.href = "/Project-Trello/pages/login.html";
+    }
 }
 
 function checkData(value, type, value2){
@@ -100,9 +127,14 @@ function checkData(value, type, value2){
         } else {
             return "valid";
         }
+    } else if(type=="title"){
+        if(value==""){
+            return "Tiêu đề không được để trống";
+        } else {
+            return "valid";
+        }
     }
 }
-
 
 
 let dataBackgrounds = ["../css/data/images/board1.jpg",
@@ -117,8 +149,9 @@ let dataBackgrounds = ["../css/data/images/board1.jpg",
     "linear-gradient(123deg, #ff00ea 0%, #fa0c00 100%)"];
 
 function saveData(){
-    let indexUser = users.findIndex(element => element.id == user.id);
-    users[indexUser] = user;
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("idNewTask", JSON.stringify(idNewTask));
+    localStorage.setItem("idNewList", JSON.stringify(idNewList));
+    localStorage.setItem("idNewBoard", JSON.stringify(idNewBoard));
 }

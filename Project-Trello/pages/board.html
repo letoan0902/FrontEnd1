@@ -282,7 +282,6 @@
       .starredBoard:hover,
       .tableBoard:hover,
       .block2:hover,
-      .footerTask:hover,
       .collapseMainCard:hover,
       .iconMoreTask:hover,
       .btnCloseFilter:hover,
@@ -295,7 +294,9 @@
       .closeCreateLabel:hover, 
       .returnCreateLabel:hover,
       .btnCloseModalDate:hover,
-      .btnRemoveModalDate:hover {
+      .btnRemoveModalDate:hover,
+      .inputAddCard:hover,
+      .textFooterTask:hover {
         background: rgba(0, 0, 0, 0.16);
         transition: background 0.3s ease;
       }
@@ -327,27 +328,30 @@
       .headerBoard {
         background: #f1f2f4;
         backdrop-filter: blur(2px);
-        height: 56px;
+        min-height: 56px;
         padding-left: 22px;
         padding-right: 20px;
         padding-top: 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: fixed;
-        width: calc(100% - 240px);
+        position: sticky;
+        width: 100%;
         left: 240px;
-        top: 48px;
+        top: 0;
       }
       .headerBoard img {
         width: 16px;
         height: 16px;
       }
       .block1 {
+        width: 100%;
         display: flex;
+        align-items: center;
       }
       .textInfoBoard {
-        height: 32px;
+        max-width: calc(100% - 360px);
+        min-height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -355,7 +359,8 @@
         font-size: 18px;
         font-weight: 700;
         line-height: 32px;
-        margin-right: 28px;
+        padding-right: 28px;
+        white-space: wrap;
       }
       .starredBoard {
         display: flex;
@@ -367,7 +372,9 @@
         align-items: center;
         cursor: pointer;
       }
-
+      .starredBoard:hover{
+        opacity: 0.8;
+      }
       .btnBoard {
         display: flex;
         width: 85px;
@@ -439,7 +446,7 @@ line-height: 21px;
       }
 
       .mainBoard {
-        margin-top: 89px;
+        margin-top: 33px;
         margin-left: 24px;
         display: flex;
         gap: 17px;
@@ -540,11 +547,11 @@ line-height: 21px;
         padding-right: 20%;
       }
       .footerTask {
+        position: relative;
         margin-top: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-left: 8px;
         height: 32px;
         cursor: pointer;
         border-radius: 3px;
@@ -554,18 +561,36 @@ line-height: 21px;
         display: flex;
         align-items: center;
         gap: 8px;
+        height: 100%;
+        width: 100%;
+      }
+      .textFooterTask{
+        width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: #F1F2F4;
+  border: none;
+  padding-left: 32px;
+  padding-right: 56px;
+  cursor: pointer;
+  outline-color: #838383;
       }
 
-      .textFooterTask {
+
+      .textFooterTask::placeholder {
         color: #44546f;
         font-weight: 500;
         line-height: 20px;
       }
+
+
       .listAddCard {
-        margin-right: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
+        position: absolute;
+        right: 8px;
+        top: 8px;
       }
 
       /* Modal Filter */
@@ -1269,7 +1294,7 @@ color: #FFF;
 font-weight: 500;
 line-height: 20px;
 }
-.btnMoveCard:hover, .btnCreateLabel:hover, .btnSaveModalDate:hover, .btnAddCard:hover{
+.btnMoveCard:hover, .btnCreateLabel:hover, .btnSaveModalDate:hover, .btnAddCard:hover, .btnAddACard:hover{
 background: #0a53ba;
 }
 
@@ -1598,9 +1623,10 @@ height: 16px;
   border-radius: 12px;
   background: #F1F2F4;
   border: none;
-  outline: none;
   padding-left: 36px;
   padding-right: 56px;
+  cursor: pointer;
+  outline-color: #838383;
 }
 .inputAddCard::placeholder{
   color: #172B4D;
@@ -1612,7 +1638,7 @@ line-height: 20px;
   top: 14px;
   left: 12px;
 }
-.btnAddCard {
+.btnAddCard{
   position: absolute;
   width: 44px;
   height: 32px;
@@ -1627,6 +1653,42 @@ line-height: 20px;
 border: none;
 display: none;
 }
+.btnAddACard{
+  position: absolute;
+  width: 44px;
+  height: 24px;
+  right: 4px;
+  top: 4px;
+  cursor: pointer;
+  border-radius: 3px;
+background: #0C66E4;
+color: #FFF;
+font-weight: 500;
+line-height: 20px;
+border: none;
+display: none;
+}
+
+.displayMessage {
+    display: block;
+    animation: displayAction 0.3s ease forwards;
+  }
+
+@keyframes displayAction {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+.errorMessage, .successSignIn{
+  top: 60px !important;
+  z-index: 1005;
+}
+
 
 .displayBtnAddCard{
   display: block;
@@ -1635,7 +1697,27 @@ display: none;
   display: none;
 }
 
-
+.iconPlusTask{
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+.displayIconPlusTask, .displayIconAddCard {
+  display: none;
+}
+.displayTextFooterTask{
+  padding-left: 8px;
+}
+.displayBtnAddACard,.displayBtnAddCard {
+  display: block;
+}
+.textTaskComplete{
+  color: #626F86;
+  line-height: 20px;
+}
+.displayInputAddCard{
+  padding-left: 8px;
+}
     </style>
   </head>
   <body>
@@ -1799,7 +1881,7 @@ display: none;
               </div>
               <div class="taskInfo">
                 <img
-                  class="iconPlusTask"
+                  class="iconCompleteTask"
                   src="../css/data/icons/complete-board.png"
                   alt=""
                 />
@@ -1837,7 +1919,7 @@ display: none;
                   src="../css/data/icons/plus-board.png"
                   alt=""
                 />
-                <span class="textFooterTask">Add a card</span>
+                <input class="textFooterTask" type="text" placeholder="Add a card"></input>
               </div>
               <div class="listAddCard">
                 <img
@@ -1846,6 +1928,7 @@ display: none;
                   alt=""
                 />
               </div>
+              <button class="btnAddACard">Add</button>
             </div>
           </div>
           <div class="addListCard">
@@ -2138,6 +2221,38 @@ display: none;
   </div>
 </div>
 
+
+<div class="errorMessage">
+  <header class="headerErrorSignin">
+    <span class="textHeaderError">
+      <img
+        class="imgHeader"
+        src="../css/data/icons/remove_circle.png"
+        alt=""
+      />
+      <span class="textError">Error</span>
+    </span>
+    <img
+      class="btnCloseError"
+      src="../css/data/icons/_BaseCloseButton.png"
+      alt=""
+    />
+  </header>
+  <div class="textBodyError">
+    <span class="textDetailed">Mật khẩu không được bỏ trống</span>
+    <span class="textDetailed">Email không được bỏ trống</span>
+  </div>
+</div>
+<div class="successSignIn">
+  <div class="bodySuccess">
+    <img
+      class="iconSuccess"
+      src="../css/data/icons/check_circle.png"
+      alt=""
+    />
+    <span class="textSuccess">Thành công</span>
+  </div>
+</div>
 
     <div class="overlayModal2"></div>
     <div class="overlayModal"></div>

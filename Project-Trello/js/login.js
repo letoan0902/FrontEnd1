@@ -14,7 +14,7 @@ btnSignIn.addEventListener("click",function(){
     textBodyError.innerHTML=``;
     let checkEmail = checkData(inputEmail.value.trim(),"email");
     let checkPassword = checkData(inputPassword.value,"password");
-    let checkUser = checkData(inputEmail.value, "user",inputPassword.value);
+    let checkUser = checkData(inputEmail.value.trim(), "user",inputPassword.value);
     if(checkEmail != "valid"){
         let span = document.createElement("span");
         span.className="textDetailed";
@@ -38,14 +38,16 @@ btnSignIn.addEventListener("click",function(){
         flag = 1;
     }
     if(flag==1){
-        errorMessage.classList.add("display");
+        errorMessage.classList.add("displayMessage");
         setTimeout(() => {
-        errorMessage.classList.remove("display");
+        errorMessage.classList.remove("displayMessage");
         }, 2000);
     } else {
-        successSignIn.classList.add("display");
+        successSignIn.classList.add("displayMessage");
         setTimeout(() => {
-        successSignIn.classList.remove("display");
+        successSignIn.classList.remove("displayMessage");
+        let user = users.find(element => element.email == inputEmail.value.trim())
+        localStorage.setItem("user",JSON.stringify(user));
         window.location = "../pages/index.html";
         }, 1000);
         
