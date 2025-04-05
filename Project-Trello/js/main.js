@@ -3,10 +3,14 @@ let listBoards = document.querySelector(".listBoards");
 let listStarred = document.querySelector(".listStarred");
 let listClosed = document.querySelector(".listClosed");
 
-let idBoard = -1;
+
+renderBoard();
+
+let checkEditBoard = false;
 
 function renderBoard() {
   boardInfos = listBoards.querySelectorAll('.boardInfo');
+  
 
   boardInfos.forEach(boardInfo => {
     boardInfo.remove();
@@ -37,11 +41,67 @@ function renderBoard() {
                 : ""
             }
             <div class="overlay"></div>
-            <span class="titleBoard">${el.title}</span>`;
+            <span class="titleBoard">${el.title}</span>
+            <div class="editBoard">
+              <img src="../css/data/icons/iconEditBoard.png" alt="">
+              <span class="textEdit">Edit this board</span>
+            </div>`;
+
+
+            boardInfo.addEventListener("mouseover", function () {
+              let editBoard = this.querySelector(".editBoard");
+              editBoard.style.display = "flex";
+              editBoard.addEventListener("click",function(){
+                backgroundId = -1;
+                boardId = el.id;
+                checkEditBoard = true;
+                inputTitle.value = `${el.title}`;
+                removeSelectedClass();
+
+                let noticeTitle = document.querySelector(".noticeTitle");
+                noticeTitle.textContent = `👋 Please provide a valid board title.`;
+                noticeTitle.style.color = "#212529";
+
+                let textHeaderCreate = document.querySelector(".textHeaderCreate");
+                textHeaderCreate.textContent = "Update board";
+
+                let createNewBoard = document.querySelector(".createNewBoard");
+                createNewBoard.textContent = "Save";
+                
+
+                overlayModalCreate.classList.add("show");
+                modalCreateBoard.classList.add("displayModal");
+                closeModalCreate.addEventListener("click", function () {
+                  overlayModalCreate.classList.remove("show");
+                  modalCreateBoard.classList.remove("displayModal");
+                });
+                closeModalCreateFooter.addEventListener("click", function () {
+                  overlayModalCreate.classList.remove("show");
+                  modalCreateBoard.classList.remove("displayModal");
+                });
+              
+                allBackgroundItems.forEach((item,index) => {
+                  item.addEventListener('click', function(event) {
+                    removeSelectedClass();
+                    let iconSelect = this.querySelector(".selectIconCreate");
+                    iconSelect.classList.add('selectedModalCreate');
+                    backgroundId = index;
+                  });
+                });
+              })
+          });
+
+        boardInfo.addEventListener("mouseout", function () {
+          let editBoard = this.querySelector(".editBoard");
+          editBoard.style.display = "none";
+      });
+
     let overlay = boardInfo.querySelector(".overlay");
     overlay.addEventListener("click", function () {
-      idBoard = el.id;
-    });
+      boardId = el.id;
+      saveData();
+      window.location.href = "../pages/board.html"
+      });
     listBoards.insertBefore(boardInfo, createBoard);
   });
 
@@ -59,32 +119,13 @@ function renderBoard() {
             <span class="titleBoard">${el.title}</span>`;
     let overlay = boardInfoStarred.querySelector(".overlay");
     overlay.addEventListener("click", function () {
-      idBoard = el.id;
-    });
+      boardId = el.id;
+      saveData();
+      window.location.href = "../pages/board.html"
+      });
     listStarred.appendChild(boardInfoStarred);
   });
-
-  boardClosed.forEach((el, index) => {
-    let boardInfoClosed = document.createElement("div");
-    boardInfoClosed.className = "boardInfoClosed";
-    boardInfoClosed.style.background = el.color;
-    boardInfoClosed.innerHTML = `
-            ${
-              el.backdrop
-                ? `<img class="backgroundBoard" src="${el.backdrop}" alt="" />`
-                : ""
-            }
-            <div class="overlay"></div>
-            <span class="titleBoard">${el.title}</span>`;
-    let overlay = boardInfoClosed.querySelector(".overlay");
-    overlay.addEventListener("click", function () {
-      idBoard = el.id;
-    });
-    listClosed.appendChild(boardInfoClosed);
-  });
 }
-
-renderBoard();
 
 let btnCreateBoard = document.querySelector(".btnCreateBoard");
 let overlayModalCreate = document.querySelector(".overlayModalCreate");
@@ -107,6 +148,11 @@ btnCreateBoard.addEventListener("click", function () {
   inputTitle.value = "";
   removeSelectedClass();
 
+  let textHeaderCreate = document.querySelector(".textHeaderCreate");
+                textHeaderCreate.textContent = "Create board";
+
+                let createNewBoard = document.querySelector(".createNewBoard");
+                createNewBoard.textContent = "Create";
   let noticeTitle = document.querySelector(".noticeTitle");
   noticeTitle.textContent = `👋 Please provide a valid board title.`;
   noticeTitle.style.color = "#212529";
@@ -139,6 +185,28 @@ createNewBoard.addEventListener("click", function () {
   if(inputTitle.value == ""){
     noticeTitle.textContent = `⛔ Title cannot be blank!`;
     noticeTitle.style.color = "red";
+  } else if(checkEditBoard){
+    if(backgroundId == -1){
+      backgroundId = 0;
+    }
+    let backdropInfo;
+    let colorInfo;
+    if(backgroundId >= 0 && backgroundId<4){
+      backdropInfo = dataBackgrounds[backgroundId];
+      colorInfo = false;
+    } else if(backgroundId<10){
+      backdropInfo = false;
+      colorInfo = dataBackgrounds[backgroundId];
+    }
+    
+    let editBoard = user.boards.find(board => board.id == boardId);
+    editBoard.title = inputTitle.value;
+    editBoard.backdrop = backdropInfo;
+    editBoard.color = colorInfo;
+    overlayModalCreate.classList.remove("show");
+    modalCreateBoard.classList.remove("displayModal");
+    saveData();
+    renderBoard();
   } else {
     if(backgroundId == -1){
       backgroundId = 0;
@@ -251,8 +319,10 @@ function renderStarredBoard(){
             <span class="titleBoard">${el.title}</span>`;
     let overlay = boardInfoStarred.querySelector(".overlay");
     overlay.addEventListener("click", function () {
-      idBoard = el.id;
-    });
+      boardId = el.id;
+      saveData();
+      window.location.href = "../pages/board.html"
+      });
     listStarred.appendChild(boardInfoStarred);
   });
 }
@@ -272,6 +342,8 @@ function renderClosedBoard(){
   starredBoards.classList.remove("selectActive");
   starredBoards.classList.add("transparent");
 
+
+
   listClosed.innerHTML=``;
   let boardClosed = user.boards.filter((element) => {
     return element.is_closed === true;
@@ -288,10 +360,6 @@ function renderClosedBoard(){
             }
             <div class="overlay"></div>
             <span class="titleBoard">${el.title}</span>`;
-    let overlay = boardInfoClosed.querySelector(".overlay");
-    overlay.addEventListener("click", function () {
-      idBoard = el.id;
-    });
     listClosed.appendChild(boardInfoClosed);
   });
 }
@@ -314,11 +382,17 @@ closeBoards.addEventListener("click",function(){
 });
 
 boardsSidebar.addEventListener("click",function(){
+  selelectBoard();
+  renderBoard();
+  closeSidebar();
+})
+
+
+function selelectBoard(){
   listBoards.style.display = "flex";
   listStarred.style.display = "flex";
   headerContent.style.display = "flex";
   headerStarred.style.display = "flex";
-  headerClosed.style.display = "flex";
   listClosed.style.display = "flex";
 
   closeBoards.classList.remove("selectActive");
@@ -327,10 +401,22 @@ boardsSidebar.addEventListener("click",function(){
   boardsSidebar.classList.remove("transparent");
   starredBoards.classList.remove("selectActive");
   starredBoards.classList.add("transparent");
+}
 
-
+if(openStarredBoards){
+  openStarredBoards = false;
+  saveData();
+  renderStarredBoard();
+  closeSidebar();
+} else if(openClosedBoards){
+  openClosedBoards = false;
+  saveData();
+  renderClosedBoard();
+  closeSidebar();
+} else if(openBoards){
+  openBoards = false;
+  saveData();
+  selelectBoard();
   renderBoard();
   closeSidebar();
-})
-
-
+}

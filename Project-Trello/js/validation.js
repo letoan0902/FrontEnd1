@@ -81,6 +81,40 @@ if(user){
     }
 }
 
+let boardId = localStorage.getItem("boardId");
+if(boardId){
+    boardId = JSON.parse(boardId);
+} else {
+    boardId = -1;
+    saveData();
+    window.location.href = "../pages/index.html"
+}
+
+let openStarredBoards = localStorage.getItem("openStarredBoards");
+if(openStarredBoards){
+    openStarredBoards = JSON.parse(openStarredBoards);
+} else {
+    openStarredBoards = false;
+    saveData();
+}
+
+let openClosedBoards = localStorage.getItem("openClosedBoards");
+if(openClosedBoards){
+    openClosedBoards = JSON.parse(openClosedBoards);
+} else {
+    openClosedBoards = false;
+    saveData();
+}
+
+let openBoards = localStorage.getItem("openBoards");
+if(openBoards){
+    openBoards = JSON.parse(openBoards);
+} else {
+    openBoards = false;
+    saveData();
+}
+
+
 function checkData(value, type, value2){
     if(type=="email"){
         let regexMail = /^[a-zA-Z](?!.*\.\.)[a-zA-Z0-9._%+-]*[a-zA-Z0-9]@(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$/;
@@ -154,4 +188,8 @@ function saveData(){
     localStorage.setItem("idNewTask", JSON.stringify(idNewTask));
     localStorage.setItem("idNewList", JSON.stringify(idNewList));
     localStorage.setItem("idNewBoard", JSON.stringify(idNewBoard));
+    localStorage.setItem("boardId", JSON.stringify(boardId));
+    localStorage.setItem("openStarredBoards", JSON.stringify(openStarredBoards));
+    localStorage.setItem("openClosedBoards", JSON.stringify(openClosedBoards));
+    localStorage.setItem("openBoards", JSON.stringify(openBoards));
 }

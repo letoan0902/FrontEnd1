@@ -214,6 +214,7 @@
   .titleBoard,
   .titleBoardStarred,
   .titleBoardClosed {
+    width: 80%;
     position: absolute;
     top: 15px;
     left: 15px;
@@ -221,7 +222,41 @@
     text-shadow: 4px 4px 6px rgba(47, 47, 47, 0.6);
     font-size: 18.438px;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  .editBoard{
+    width: 80%;
+    max-width: 168px;
+    height: 32px;
+    position: absolute;
+    bottom: 13px;
+    left: 15px;
+    z-index: 995;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    gap: 8px;
+    border-radius: 3px;
+background: #2C3E5D;
+cursor: pointer;
+display: none;
+  }
+  .editBoard:hover{
+    background: #4c5b74;
+  }
+  .editBoard img{
+    width: 16px;
+    height: 16px;
+  }
+  .textEdit{
+    color: #FFF;
+font-size: 14px;
+font-weight: 500;
+line-height: 20px;
+  }
+  
   .overlay {
     position: absolute;
     top: 0;
@@ -232,6 +267,7 @@
     opacity: 0;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 900;
   }
   .overlay:hover {
     opacity: 1;
@@ -285,7 +321,9 @@
   .titleBoardClosed {
     font-size: 15px;
   }
-
+  .headerClosed{
+    display: none;
+  }
 
   /* Modal */
 

@@ -39,7 +39,6 @@ let successSignIn = document.querySelector(".successSignIn");
 let listBoards = user.boards.filter(board => board.is_closed != true);
 let listYourBoards = document.querySelector(".listYourBoards");
 
-let boardId = listBoards[0].id;
 function renderListBoards(){
   listBoards = user.boards.filter(board => board.is_closed != true);
 
@@ -358,8 +357,25 @@ changeId(boardId);
 
 
 
+let boardsSidebar = document.querySelector(".boardsSidebar");
+let starredBoards = document.querySelector(".starredBoards");
+let closeBoards = document.querySelector(".closeBoards");
 
-
+boardsSidebar.addEventListener("click",function(){
+  openBoards = true;
+  saveData();
+  window.location.href = "../pages/index.html";
+});
+starredBoards.addEventListener("click",function(){
+  openStarredBoards = true;
+  saveData();
+  window.location.href = "../pages/index.html";
+});
+closeBoards.addEventListener("click",function(){
+  openClosedBoards = true;
+  saveData();
+  window.location.href = "../pages/index.html";
+});
 
 
 
