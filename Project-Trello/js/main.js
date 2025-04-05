@@ -1,23 +1,19 @@
-
 let listBoards = document.querySelector(".listBoards");
 let listStarred = document.querySelector(".listStarred");
 let listClosed = document.querySelector(".listClosed");
-
 
 renderBoard();
 
 let checkEditBoard = false;
 
 function renderBoard() {
-  boardInfos = listBoards.querySelectorAll('.boardInfo');
-  
+  boardInfos = listBoards.querySelectorAll(".boardInfo");
 
-  boardInfos.forEach(boardInfo => {
+  boardInfos.forEach((boardInfo) => {
     boardInfo.remove();
   });
-  listStarred.innerHTML=``;
-  listClosed.innerHTML=``;
-
+  listStarred.innerHTML = ``;
+  listClosed.innerHTML = ``;
 
   let boardStarred = user.boards.filter((element) => {
     return element.is_starred === true;
@@ -47,61 +43,59 @@ function renderBoard() {
               <span class="textEdit">Edit this board</span>
             </div>`;
 
+    boardInfo.addEventListener("mouseover", function () {
+      let editBoard = this.querySelector(".editBoard");
+      editBoard.style.display = "flex";
+      editBoard.addEventListener("click", function () {
+        backgroundId = -1;
+        boardId = el.id;
+        checkEditBoard = true;
+        inputTitle.value = `${el.title}`;
+        removeSelectedClass();
 
-            boardInfo.addEventListener("mouseover", function () {
-              let editBoard = this.querySelector(".editBoard");
-              editBoard.style.display = "flex";
-              editBoard.addEventListener("click",function(){
-                backgroundId = -1;
-                boardId = el.id;
-                checkEditBoard = true;
-                inputTitle.value = `${el.title}`;
-                removeSelectedClass();
+        let noticeTitle = document.querySelector(".noticeTitle");
+        noticeTitle.textContent = `👋 Please provide a valid board title.`;
+        noticeTitle.style.color = "#212529";
 
-                let noticeTitle = document.querySelector(".noticeTitle");
-                noticeTitle.textContent = `👋 Please provide a valid board title.`;
-                noticeTitle.style.color = "#212529";
+        let textHeaderCreate = document.querySelector(".textHeaderCreate");
+        textHeaderCreate.textContent = "Update board";
 
-                let textHeaderCreate = document.querySelector(".textHeaderCreate");
-                textHeaderCreate.textContent = "Update board";
+        let createNewBoard = document.querySelector(".createNewBoard");
+        createNewBoard.textContent = "Save";
 
-                let createNewBoard = document.querySelector(".createNewBoard");
-                createNewBoard.textContent = "Save";
-                
+        overlayModalCreate.classList.add("show");
+        modalCreateBoard.classList.add("displayModal");
+        closeModalCreate.addEventListener("click", function () {
+          overlayModalCreate.classList.remove("show");
+          modalCreateBoard.classList.remove("displayModal");
+        });
+        closeModalCreateFooter.addEventListener("click", function () {
+          overlayModalCreate.classList.remove("show");
+          modalCreateBoard.classList.remove("displayModal");
+        });
 
-                overlayModalCreate.classList.add("show");
-                modalCreateBoard.classList.add("displayModal");
-                closeModalCreate.addEventListener("click", function () {
-                  overlayModalCreate.classList.remove("show");
-                  modalCreateBoard.classList.remove("displayModal");
-                });
-                closeModalCreateFooter.addEventListener("click", function () {
-                  overlayModalCreate.classList.remove("show");
-                  modalCreateBoard.classList.remove("displayModal");
-                });
-              
-                allBackgroundItems.forEach((item,index) => {
-                  item.addEventListener('click', function(event) {
-                    removeSelectedClass();
-                    let iconSelect = this.querySelector(".selectIconCreate");
-                    iconSelect.classList.add('selectedModalCreate');
-                    backgroundId = index;
-                  });
-                });
-              })
+        allBackgroundItems.forEach((item, index) => {
+          item.addEventListener("click", function (event) {
+            removeSelectedClass();
+            let iconSelect = this.querySelector(".selectIconCreate");
+            iconSelect.classList.add("selectedModalCreate");
+            backgroundId = index;
           });
-
-        boardInfo.addEventListener("mouseout", function () {
-          let editBoard = this.querySelector(".editBoard");
-          editBoard.style.display = "none";
+        });
       });
+    });
+
+    boardInfo.addEventListener("mouseout", function () {
+      let editBoard = this.querySelector(".editBoard");
+      editBoard.style.display = "none";
+    });
 
     let overlay = boardInfo.querySelector(".overlay");
     overlay.addEventListener("click", function () {
       boardId = el.id;
       saveData();
-      window.location.href = "../pages/board.html"
-      });
+      window.location.href = "../pages/board.html";
+    });
     listBoards.insertBefore(boardInfo, createBoard);
   });
 
@@ -121,8 +115,8 @@ function renderBoard() {
     overlay.addEventListener("click", function () {
       boardId = el.id;
       saveData();
-      window.location.href = "../pages/board.html"
-      });
+      window.location.href = "../pages/board.html";
+    });
     listStarred.appendChild(boardInfoStarred);
   });
 }
@@ -134,8 +128,10 @@ let closeModalCreate = document.querySelector(".closeModalCreate");
 let closeModalCreateFooter = document.querySelector(".closeModalCreateFooter");
 let createNewBoard = document.querySelector(".createNewBoard");
 
-let backgroundItems = Array.from(document.querySelectorAll('.backgroundCreateInfo'));
-let colorItems = Array.from(document.querySelectorAll('.colorCreateInfo'));
+let backgroundItems = Array.from(
+  document.querySelectorAll(".backgroundCreateInfo")
+);
+let colorItems = Array.from(document.querySelectorAll(".colorCreateInfo"));
 
 let allBackgroundItems = backgroundItems.concat(colorItems);
 
@@ -149,10 +145,10 @@ btnCreateBoard.addEventListener("click", function () {
   removeSelectedClass();
 
   let textHeaderCreate = document.querySelector(".textHeaderCreate");
-                textHeaderCreate.textContent = "Create board";
+  textHeaderCreate.textContent = "Create board";
 
-                let createNewBoard = document.querySelector(".createNewBoard");
-                createNewBoard.textContent = "Create";
+  let createNewBoard = document.querySelector(".createNewBoard");
+  createNewBoard.textContent = "Create";
   let noticeTitle = document.querySelector(".noticeTitle");
   noticeTitle.textContent = `👋 Please provide a valid board title.`;
   noticeTitle.style.color = "#212529";
@@ -168,38 +164,37 @@ btnCreateBoard.addEventListener("click", function () {
     modalCreateBoard.classList.remove("displayModal");
   });
 
-  allBackgroundItems.forEach((item,index) => {
-    item.addEventListener('click', function(event) {
+  allBackgroundItems.forEach((item, index) => {
+    item.addEventListener("click", function (event) {
       removeSelectedClass();
       let iconSelect = this.querySelector(".selectIconCreate");
-      iconSelect.classList.add('selectedModalCreate');
+      iconSelect.classList.add("selectedModalCreate");
       backgroundId = index;
     });
   });
 });
 
-
 createNewBoard.addEventListener("click", function () {
   let noticeTitle = document.querySelector(".noticeTitle");
   noticeTitle.textContent = `👋 Please provide a valid board title.`;
-  if(inputTitle.value == ""){
+  if (inputTitle.value == "") {
     noticeTitle.textContent = `⛔ Title cannot be blank!`;
     noticeTitle.style.color = "red";
-  } else if(checkEditBoard){
-    if(backgroundId == -1){
+  } else if (checkEditBoard) {
+    if (backgroundId == -1) {
       backgroundId = 0;
     }
     let backdropInfo;
     let colorInfo;
-    if(backgroundId >= 0 && backgroundId<4){
+    if (backgroundId >= 0 && backgroundId < 4) {
       backdropInfo = dataBackgrounds[backgroundId];
       colorInfo = false;
-    } else if(backgroundId<10){
+    } else if (backgroundId < 10) {
       backdropInfo = false;
       colorInfo = dataBackgrounds[backgroundId];
     }
-    
-    let editBoard = user.boards.find(board => board.id == boardId);
+
+    let editBoard = user.boards.find((board) => board.id == boardId);
     editBoard.title = inputTitle.value;
     editBoard.backdrop = backdropInfo;
     editBoard.color = colorInfo;
@@ -208,21 +203,24 @@ createNewBoard.addEventListener("click", function () {
     saveData();
     renderBoard();
   } else {
-    if(backgroundId == -1){
+    if (backgroundId == -1) {
       backgroundId = 0;
     }
     let backdropInfo;
     let colorInfo;
-    if(backgroundId >= 0 && backgroundId<4){
+    if (backgroundId >= 0 && backgroundId < 4) {
       backdropInfo = dataBackgrounds[backgroundId];
       colorInfo = false;
-    } else if(backgroundId<10){
+    } else if (backgroundId < 10) {
       backdropInfo = false;
       colorInfo = dataBackgrounds[backgroundId];
     }
-    
+
     let newBoard = {
-      id: user.boards.length > 0 ? user.boards[user.boards.length - 1].id + 1 : 101,
+      id:
+        user.boards.length > 0
+          ? user.boards[user.boards.length - 1].id + 1
+          : 101,
       title: inputTitle.value,
       description: false,
       backdrop: backdropInfo,
@@ -231,7 +229,7 @@ createNewBoard.addEventListener("click", function () {
       is_closed: false,
       created_at: new Date().toISOString(),
       lists: [],
-    }
+    };
     user.boards.push(newBoard);
     overlayModalCreate.classList.remove("show");
     modalCreateBoard.classList.remove("displayModal");
@@ -240,16 +238,12 @@ createNewBoard.addEventListener("click", function () {
   }
 });
 
-
-
 function removeSelectedClass() {
-  allBackgroundItems.forEach(item => {
+  allBackgroundItems.forEach((item) => {
     let iconSelect = item.querySelector(".selectIconCreate");
-    iconSelect.classList.remove('selectedModalCreate');
+    iconSelect.classList.remove("selectedModalCreate");
   });
 }
-
-
 
 // Media
 
@@ -257,36 +251,30 @@ let listDashboardMedia = document.querySelector(".listDashboardMedia");
 let overlaySidebar = document.querySelector(".overlaySidebar");
 let sidebar = document.querySelector(".sidebar");
 
-listDashboardMedia.addEventListener("click",function(){
+listDashboardMedia.addEventListener("click", function () {
   overlaySidebar.classList.add("showOverlaySidebar");
   sidebar.classList.add("displaySidebar");
   sidebar.classList.remove("hiddenSidebar");
 });
 
-overlaySidebar.addEventListener("click",function(){
+overlaySidebar.addEventListener("click", function () {
   closeSidebar();
 });
 
-function closeSidebar(){
+function closeSidebar() {
   sidebar.classList.add("hiddenSidebar");
   overlaySidebar.classList.remove("showOverlaySidebar");
-  setTimeout(()=>{
-  sidebar.classList.remove("hiddenSidebar");
-  sidebar.classList.remove("displaySidebar");
-  },500);
+  setTimeout(() => {
+    sidebar.classList.remove("hiddenSidebar");
+    sidebar.classList.remove("displaySidebar");
+  }, 500);
 }
-
-
-
 
 let headerContent = document.querySelector(".headerContent");
 let headerStarred = document.querySelector(".headerStarred");
 let headerClosed = document.querySelector(".headerClosed");
 
-
-
-
-function renderStarredBoard(){
+function renderStarredBoard() {
   listBoards.style.display = "none";
   listClosed.style.display = "none";
   headerContent.style.display = "none";
@@ -301,7 +289,7 @@ function renderStarredBoard(){
   closeBoards.classList.remove("selectActive");
   closeBoards.classList.add("transparent");
 
-  listStarred.innerHTML=``;
+  listStarred.innerHTML = ``;
   let boardStarred = user.boards.filter((element) => {
     return element.is_starred === true;
   });
@@ -321,13 +309,13 @@ function renderStarredBoard(){
     overlay.addEventListener("click", function () {
       boardId = el.id;
       saveData();
-      window.location.href = "../pages/board.html"
-      });
+      window.location.href = "../pages/board.html";
+    });
     listStarred.appendChild(boardInfoStarred);
   });
 }
 
-function renderClosedBoard(){
+function renderClosedBoard() {
   listBoards.style.display = "none";
   listStarred.style.display = "none";
   headerContent.style.display = "none";
@@ -342,9 +330,7 @@ function renderClosedBoard(){
   starredBoards.classList.remove("selectActive");
   starredBoards.classList.add("transparent");
 
-
-
-  listClosed.innerHTML=``;
+  listClosed.innerHTML = ``;
   let boardClosed = user.boards.filter((element) => {
     return element.is_closed === true;
   });
@@ -364,31 +350,27 @@ function renderClosedBoard(){
   });
 }
 
-
-
-
 let boardsSidebar = document.querySelector(".boardsSidebar");
 let starredBoards = document.querySelector(".starredBoards");
 let closeBoards = document.querySelector(".closeBoards");
 
-starredBoards.addEventListener("click",function(){
+starredBoards.addEventListener("click", function () {
   renderStarredBoard();
   closeSidebar();
 });
 
-closeBoards.addEventListener("click",function(){
+closeBoards.addEventListener("click", function () {
   renderClosedBoard();
   closeSidebar();
 });
 
-boardsSidebar.addEventListener("click",function(){
+boardsSidebar.addEventListener("click", function () {
   selelectBoard();
   renderBoard();
   closeSidebar();
-})
+});
 
-
-function selelectBoard(){
+function selelectBoard() {
   listBoards.style.display = "flex";
   listStarred.style.display = "flex";
   headerContent.style.display = "flex";
@@ -403,17 +385,17 @@ function selelectBoard(){
   starredBoards.classList.add("transparent");
 }
 
-if(openStarredBoards){
+if (openStarredBoards) {
   openStarredBoards = false;
   saveData();
   renderStarredBoard();
   closeSidebar();
-} else if(openClosedBoards){
+} else if (openClosedBoards) {
   openClosedBoards = false;
   saveData();
   renderClosedBoard();
   closeSidebar();
-} else if(openBoards){
+} else if (openBoards) {
   openBoards = false;
   saveData();
   selelectBoard();

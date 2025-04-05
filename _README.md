@@ -33,7 +33,9 @@ Up code len Git
       git push origin main --force
 
 
-
+git add .
+git commit -m "1"
+git push origin main
 
 
 
