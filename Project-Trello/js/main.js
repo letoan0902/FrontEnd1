@@ -18,9 +18,6 @@ function renderBoard() {
   let boardStarred = user.boards.filter((element) => {
     return element.is_starred === true;
   });
-  let boardClosed = user.boards.filter((element) => {
-    return element.is_closed === true;
-  });
   let boardNormal = user.boards.filter((element) => {
     return element.is_closed !== true && element.is_starred !== true;
   });
@@ -110,7 +107,62 @@ function renderBoard() {
                 : ""
             }
             <div class="overlay"></div>
-            <span class="titleBoard">${el.title}</span>`;
+            <span class="titleBoard">${el.title}</span>
+            <div class="editBoard">
+              <img src="../css/data/icons/iconEditBoard.png" alt="">
+              <span class="textEdit">Edit this board</span>
+            </div>`;
+
+    boardInfoStarred.addEventListener("mouseover", function () {
+      let editBoard = this.querySelector(".editBoard");
+      editBoard.style.display = "flex";
+    });
+
+    boardInfoStarred.addEventListener("mouseout", function () {
+      let editBoard = this.querySelector(".editBoard");
+      editBoard.style.display = "none";
+    });
+
+    let editBoard = boardInfoStarred.querySelector(".editBoard");
+    editBoard.addEventListener("click", function () {
+      backgroundId = -1;
+      boardId = el.id;
+      checkEditBoard = true;
+      inputTitle.value = `${el.title}`;
+      removeSelectedClass();
+
+      let noticeTitle = document.querySelector(".noticeTitle");
+      noticeTitle.textContent = `👋 Please provide a valid board title.`;
+      noticeTitle.style.color = "#212529";
+
+      let textHeaderCreate = document.querySelector(".textHeaderCreate");
+      textHeaderCreate.textContent = "Update board";
+
+      let createNewBoard = document.querySelector(".createNewBoard");
+      createNewBoard.textContent = "Save";
+
+      overlayModalCreate.classList.add("show");
+      modalCreateBoard.classList.add("displayModal");
+
+      closeModalCreate.addEventListener("click", function () {
+        overlayModalCreate.classList.remove("show");
+        modalCreateBoard.classList.remove("displayModal");
+      });
+      closeModalCreateFooter.addEventListener("click", function () {
+        overlayModalCreate.classList.remove("show");
+        modalCreateBoard.classList.remove("displayModal");
+      });
+
+      allBackgroundItems.forEach((item, index) => {
+        item.addEventListener("click", function (event) {
+          removeSelectedClass();
+          let iconSelect = this.querySelector(".selectIconCreate");
+          iconSelect.classList.add("selectedModalCreate");
+          backgroundId = index;
+        });
+      });
+    });
+
     let overlay = boardInfoStarred.querySelector(".overlay");
     overlay.addEventListener("click", function () {
       boardId = el.id;
@@ -139,8 +191,8 @@ let inputTitle = document.querySelector(".inputTitle");
 let backgroundId = -1;
 
 btnCreateBoard.addEventListener("click", function () {
+  checkEditBoard = false;
   backgroundId = -1;
-
   inputTitle.value = "";
   removeSelectedClass();
 
@@ -298,19 +350,71 @@ function renderStarredBoard() {
     boardInfoStarred.className = "boardInfoStarred";
     boardInfoStarred.style.background = el.color;
     boardInfoStarred.innerHTML = `
-            ${
-              el.backdrop
-                ? `<img class="backgroundBoard" src="${el.backdrop}" alt="" />`
-                : ""
-            }
-            <div class="overlay"></div>
-            <span class="titleBoard">${el.title}</span>`;
+      ${el.backdrop ? `<img class="backgroundBoard" src="${el.backdrop}" alt="" />` : ""}
+      <div class="overlay"></div>
+      <span class="titleBoard">${el.title}</span>
+      <div class="editBoard" style="display: none;">
+        <img src="../css/data/icons/iconEditBoard.png" alt="">
+        <span class="textEdit">Edit this board</span>
+      </div>`;
+
+    boardInfoStarred.addEventListener("mouseover", function () {
+      let editBoard = this.querySelector(".editBoard");
+      editBoard.style.display = "flex";
+    });
+
+    boardInfoStarred.addEventListener("mouseout", function () {
+      let editBoard = this.querySelector(".editBoard");
+      editBoard.style.display = "none";
+    });
+
+    let editBoard = boardInfoStarred.querySelector(".editBoard");
+    editBoard.addEventListener("click", function () {
+      backgroundId = -1;
+      boardId = el.id;
+      checkEditBoard = true;
+      inputTitle.value = `${el.title}`;
+      removeSelectedClass();
+
+      let noticeTitle = document.querySelector(".noticeTitle");
+      noticeTitle.textContent = `👋 Please provide a valid board title.`;
+      noticeTitle.style.color = "#212529";
+
+      let textHeaderCreate = document.querySelector(".textHeaderCreate");
+      textHeaderCreate.textContent = "Update board";
+
+      let createNewBoard = document.querySelector(".createNewBoard");
+      createNewBoard.textContent = "Save";
+
+      overlayModalCreate.classList.add("show");
+      modalCreateBoard.classList.add("displayModal");
+
+      closeModalCreate.addEventListener("click", function () {
+        overlayModalCreate.classList.remove("show");
+        modalCreateBoard.classList.remove("displayModal");
+      });
+      closeModalCreateFooter.addEventListener("click", function () {
+        overlayModalCreate.classList.remove("show");
+        modalCreateBoard.classList.remove("displayModal");
+      });
+
+      allBackgroundItems.forEach((item, index) => {
+        item.addEventListener("click", function (event) {
+          removeSelectedClass();
+          let iconSelect = this.querySelector(".selectIconCreate");
+          iconSelect.classList.add("selectedModalCreate");
+          backgroundId = index;
+        });
+      });
+    });
+
     let overlay = boardInfoStarred.querySelector(".overlay");
     overlay.addEventListener("click", function () {
       boardId = el.id;
       saveData();
       window.location.href = "../pages/board.html";
     });
+
     listStarred.appendChild(boardInfoStarred);
   });
 }
@@ -345,7 +449,20 @@ function renderClosedBoard() {
                 : ""
             }
             <div class="overlay"></div>
-            <span class="titleBoard">${el.title}</span>`;
+            <span class="titleBoard">${el.title}</span>
+            <div class="editBoard">
+              <img src="../css/data/icons/iconEditBoard.png" alt="">
+              <span class="textEdit">Edit this board</span>
+            </div>`;
+
+            boardInfoStarred.addEventListener("mouseover", function () {
+              let editBoard = this.querySelector(".editBoard");
+              editBoard.style.display = "flex";
+            });
+            boardInfoStarred.addEventListener("mouseout", function () {
+              let editBoard = this.querySelector(".editBoard");
+              editBoard.style.display = "none";
+            });
     listClosed.appendChild(boardInfoClosed);
   });
 }

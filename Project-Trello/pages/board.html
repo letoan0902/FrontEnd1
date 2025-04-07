@@ -997,7 +997,7 @@ display: none;
   gap: 3px;
 }
 .block1ModalDetail {
-  height: 36px;
+  min-height: 36px;
   display: flex;
   gap: 16px;
   align-items: center;
@@ -1045,6 +1045,9 @@ display: flex;
 align-items: center;
 position: relative;
 top: 1px;
+max-width: 200px;
+white-space: nowrap;
+overflow: hidden;
 }
 .mainModalDetail {
   margin-top: 24px;
@@ -1107,6 +1110,7 @@ background: #0b57c1;
 }
 .cancelDetail:hover{
   background: red;
+  color: white;
   transition: background 0.5s ease;
 }
 .block2MainDetail {
@@ -1229,11 +1233,8 @@ overflow: hidden;
 text-overflow: ellipsis;
 margin-bottom: 32px;
 outline: none;
-}
-.inputBoardMove::placeholder{
-  color: #172B4D;
+color: #172B4D;
 line-height: 20px;
-
 }
 .moveListMain {
   display: flex;
@@ -1482,6 +1483,11 @@ z-index: 1003;
 display: none;
 }
 
+.displayModalDate {
+    display: block;
+    animation: slideIn 0.3s ease forwards;
+  }
+
 .headerModalDate {
   width: 100%;
   position: relative;
@@ -1612,6 +1618,7 @@ background: #F1F2F4;
 position: relative;
 border-radius: 12px;
 background: #F1F2F4;
+flex-shrink: 0;
 }
 .addListCard img{
   width: 16px;
@@ -1627,6 +1634,7 @@ height: 16px;
   padding-right: 56px;
   cursor: pointer;
   outline-color: #838383;
+  flex-shrink: 0;
 }
 .inputAddCard::placeholder{
   color: #172B4D;
@@ -1717,6 +1725,9 @@ display: none;
 }
 .displayInputAddCard{
   padding-left: 8px;
+}
+.labelSelected{
+  border: 2px solid gray;
 }
     </style>
   </head>
@@ -2139,7 +2150,7 @@ display: none;
   <div class="mainModalMove">
     <h3 class="textMainMove">Select destination</h3>
     <h2 class="textBlockMoveCard">Board</h2>
-    <input class="inputBoardMove" type="text" placeholder="Tổ chức sự kiện Year-end party !">
+    <input class="inputBoardMove" type="text" disabled>
     <div class="moveListMain">
       <div class="block1MoveList">
         <h2 class="textBlockMoveCard">List</h2>
@@ -2147,7 +2158,7 @@ display: none;
           <!-- <span class="textBlockCurrent">In-progress</span>
           <img class="iconOpenBlockMove" src="../css/data/icons/open-filter.png" alt=""> -->
           <select class="listMoveCard">
-            <option class="optionListMove" value="In-progress">In-progress</option>
+            <!-- <option class="optionListMove" value="In-progress">In-progress</option> -->
           </select>
         </div>
       </div>

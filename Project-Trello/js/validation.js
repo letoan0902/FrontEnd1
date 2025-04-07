@@ -49,27 +49,6 @@ if (users) {
   ];
 }
 
-let idNewTask = localStorage.getItem("idNewTask");
-if (idNewTask) {
-  idNewTask = JSON.parse(idNewTask);
-} else {
-  idNewTask = 301;
-}
-
-let idNewList = localStorage.getItem("idNewList");
-if (idNewList) {
-  idNewList = JSON.parse(idNewList);
-} else {
-  idNewList = 201;
-}
-
-let idNewBoard = localStorage.getItem("idNewBoard");
-if (idNewBoard) {
-  idNewBoard = JSON.parse(idNewBoard);
-} else {
-  idNewBoard = 101;
-}
-
 let user = localStorage.getItem("user");
 if (user) {
   user = JSON.parse(user);
@@ -104,6 +83,7 @@ if (openBoards) {
 } else {
   openBoards = false;
 }
+
 let boardId = localStorage.getItem("boardId");
 if (boardId) {
   boardId = JSON.parse(boardId);
@@ -112,6 +92,25 @@ if (boardId) {
   saveData();
   window.location.href = "../pages/index.html";
 }
+
+let taskId = localStorage.getItem("taskId");
+if (taskId) {
+  taskId = JSON.parse(taskId);
+} else {
+  taskId = -1;
+  saveData();
+  window.location.href = "../pages/index.html";
+}
+
+let listId = localStorage.getItem("listId");
+if (listId) {
+  listId = JSON.parse(listId);
+} else {
+  listId = -1;
+  saveData();
+  window.location.href = "../pages/index.html";
+}
+
 
 function checkData(value, type, value2) {
   if (type == "email") {
@@ -166,6 +165,12 @@ function checkData(value, type, value2) {
     } else {
       return "valid";
     }
+  } else if (type == "description"){
+    if (value == "") {
+      return "Mô tả chi tiết không được để trống";
+    } else {
+      return "valid";
+    }
   }
 }
 
@@ -179,8 +184,24 @@ let dataBackgrounds = [
   "linear-gradient(123deg, #00ff2f 0%, #00ffc8 100%)",
   "linear-gradient(123deg, #00ffe5 0%, #004bfa 100%)",
   "linear-gradient(123deg, #ffa200 0%, #edfa00 100%)",
-  "linear-gradient(123deg, #ff00ea 0%, #fa0c00 100%)",
+  "linear-gradient(123deg, #ff00ea 0%, #fa0c00 100%)"
 ];
+
+let dataColorLabel = [
+  "#BAF3DB",
+  "#F8E6A0",
+  "#FEDEC8",
+  "#FFD5D2",
+  "#DFD8FD",
+  "#4BCE97",
+  "#F5CD47",
+  "#FEA362",
+  "#F87168",
+  "#9F8FEF"
+];
+
+
+
 
 saveData();
 function saveData() {
@@ -188,10 +209,9 @@ function saveData() {
   if (user) {
     localStorage.setItem("user", JSON.stringify(user));
   }
-  localStorage.setItem("idNewTask", JSON.stringify(idNewTask));
-  localStorage.setItem("idNewList", JSON.stringify(idNewList));
-  localStorage.setItem("idNewBoard", JSON.stringify(idNewBoard));
   localStorage.setItem("boardId", JSON.stringify(boardId));
+  localStorage.setItem("taskId", JSON.stringify(taskId));
+  localStorage.setItem("listId", JSON.stringify(listId));
   localStorage.setItem("openStarredBoards", JSON.stringify(openStarredBoards));
   localStorage.setItem("openClosedBoards", JSON.stringify(openClosedBoards));
   localStorage.setItem("openBoards", JSON.stringify(openBoards));
