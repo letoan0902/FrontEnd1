@@ -531,6 +531,7 @@ line-height: 21px;
         gap: 6px;
         flex-shrink: 0;
         cursor: pointer;
+        position: relative;
       }
 
       .taskComplete {
@@ -1729,6 +1730,23 @@ display: none;
 .labelSelected{
   border: 2px solid gray;
 }
+.iconCloseTask {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  z-index: 800;
+  display: none;
+}
+.iconCloseTask:hover{
+  background: rgb(252, 120, 44);
+}
+
     </style>
   </head>
   <body>
@@ -1889,6 +1907,7 @@ display: none;
                   alt=""
                 />
                 <span class="textTask">Thuê DJ</span>
+                <span class="iconCloseTask">✖️</span>
               </div>
               <div class="taskInfo">
                 <img

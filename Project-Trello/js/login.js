@@ -50,10 +50,10 @@ btnSignIn.addEventListener("click", function () {
     successSignIn.classList.add("displayMessage");
     setTimeout(() => {
       successSignIn.classList.remove("displayMessage");
-      let user = users.find(
+      user = users.find(
         (element) => element.email == inputEmail.value.trim()
       );
-      localStorage.setItem("user", JSON.stringify(user));
+      saveData();
       window.location = "../pages/index.html";
     }, 1000);
   }

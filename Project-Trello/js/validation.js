@@ -207,6 +207,11 @@ saveData();
 function saveData() {
   localStorage.setItem("users", JSON.stringify(users));
   if (user) {
+    let userIndex = users.findIndex(element => element.id === user.id);
+    if (userIndex !== -1) {
+      users[userIndex] = { ...user };
+    }
+    localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(user));
   }
   localStorage.setItem("boardId", JSON.stringify(boardId));

@@ -419,7 +419,7 @@ function renderStarredBoard() {
   });
 }
 
-function renderClosedBoard() {
+function renderClosedBoard() {  
   listBoards.style.display = "none";
   listStarred.style.display = "none";
   headerContent.style.display = "none";
@@ -449,20 +449,7 @@ function renderClosedBoard() {
                 : ""
             }
             <div class="overlay"></div>
-            <span class="titleBoard">${el.title}</span>
-            <div class="editBoard">
-              <img src="../css/data/icons/iconEditBoard.png" alt="">
-              <span class="textEdit">Edit this board</span>
-            </div>`;
-
-            boardInfoStarred.addEventListener("mouseover", function () {
-              let editBoard = this.querySelector(".editBoard");
-              editBoard.style.display = "flex";
-            });
-            boardInfoStarred.addEventListener("mouseout", function () {
-              let editBoard = this.querySelector(".editBoard");
-              editBoard.style.display = "none";
-            });
+            <span class="titleBoard">${el.title}</span>`;
     listClosed.appendChild(boardInfoClosed);
   });
 }
@@ -519,3 +506,10 @@ if (openStarredBoards) {
   renderBoard();
   closeSidebar();
 }
+
+
+let SignOut = document.querySelector(".SignOut");
+SignOut.addEventListener("click",function(){
+  localStorage.removeItem("user");
+  window.location.href = "../pages/login.html";
+});

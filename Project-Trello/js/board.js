@@ -33,7 +33,7 @@ let saveDetail = document.querySelector(".saveDetail");
 let cancelDetail = document.querySelector(".cancelDetail");
 let labelId=0;
 
-
+let typeClose = null;
 
 let errorMessage = document.querySelector(".errorMessage");
 let btnCloseError = document.querySelector(".btnCloseError");
@@ -146,8 +146,8 @@ function changeId(newId) {
 
   let btncloseBoard = headerBoard.querySelector(".btncloseBoard");
   btncloseBoard.addEventListener("click", function () {
-    modalCloseBoard.classList.add("displayModalCloseBoard");
-    overlayModal.classList.add("show");
+    typeClose="closeBoard";
+    showModalClose();
   });
 
   mainBoard.innerHTML = `<div class="addListCard">
@@ -157,8 +157,11 @@ function changeId(newId) {
 </div>`;
 
   let addListCard = mainBoard.querySelector(".addListCard");
+  let clickList = 0;
   addListCard.addEventListener("click", function () {
-    let inputAddCard = addListCard.querySelector(".inputAddCard");
+    clickList++;
+    if(clickList===1){
+      let inputAddCard = addListCard.querySelector(".inputAddCard");
     let btnAddCard = addListCard.querySelector(".btnAddCard");
     let iconAddCard = addListCard.querySelector(".iconAddCard");
     let btnCloseError = errorMessage.querySelector(".btnCloseError");
@@ -201,6 +204,7 @@ function changeId(newId) {
         changeId(boardId);
       }
     });
+    }
   });
 
   let lists = [...board.lists];
@@ -249,8 +253,8 @@ function changeId(newId) {
       taskInfo.innerHTML = `
       ${
         task.status == "pending"
-          ? `<span class="textTask">${task.title}</span>`
-          : `<img class="iconCompleteTask" src="../css/data/icons/complete-board.png" alt=""/> <span class="textTask textTaskComplete">${task.title}</span>`
+          ? `<span class="textTask">${task.title}</span> <span class="iconCloseTask">✖️</span>`
+          : `<img class="iconCompleteTask" src="../css/data/icons/complete-board.png" alt=""/> <span class="textTask textTaskComplete">${task.title}</span> <span class="iconCloseTask">✖️</span>`
       }`;
 
 
@@ -270,16 +274,42 @@ function changeId(newId) {
         myEditor.setData(`${task.description}`);
       })
 
+      let iconCloseTask = taskInfo.querySelector(".iconCloseTask");
+
+      taskInfo.addEventListener("mouseover", function () {
+          iconCloseTask.style.display = "flex";
+      });
+    
+      taskInfo.addEventListener("mouseout", function () {
+          iconCloseTask.style.display = "none";
+      });
+
+      iconCloseTask.addEventListener("click",function(event){
+        event.stopPropagation();
+        taskId = task.id;
+        listId = element.id;
+        typeClose="removeTask";
+        showModalClose();
+      })
+
+
+
       listTasks.appendChild(taskInfo);
     });
 
+    
+
     // Logic thêm 1 task mới
     let addCard = listMainCard.querySelector(".footerTask");
+    let clickTask =0;
     addCard.addEventListener("click", function () {
-      let inputCard = addCard.querySelector(".textFooterTask");
+      clickTask++;
+      console.log(clickTask);
+      
+      if(clickTask===1){
+        let inputCard = addCard.querySelector(".textFooterTask");
       let btnAddACard = addCard.querySelector(".btnAddACard");
       let iconPlusTask = addCard.querySelector(".iconPlusTask");
-      let btnCloseError = errorMessage.querySelector(".btnCloseError");
 
       inputCard.classList.add("displayTextFooterTask");
       btnAddACard.classList.add("displayBtnAddACard");
@@ -309,6 +339,7 @@ function changeId(newId) {
           changeId(boardId);
         }
       });
+      }
     });
 
     mainBoard.insertBefore(listMainCard, addListCard);
@@ -331,21 +362,7 @@ changeId(boardId);
 // Logic đóng bảng
 let btnAngreeCLoseBoard = document.querySelector(".btnAngreeCLoseBoard");
 let btnCancelCloseBoard = document.querySelector(".btnCancelCloseBoard");
-btnAngreeCLoseBoard.addEventListener("click", function () {
-  let boardClosed = listBoards.find((element) => element.id == boardId);
-  boardClosed.is_closed = true;
-  modalCloseBoard.classList.remove("displayModalCloseBoard");
-  overlayModal.classList.remove("show");
-  listBoards = user.boards.filter((board) => board.is_closed !== true);
-  saveData();
-  if (listBoards.length > 0) {
-    boardId = listBoards[0].id;
-    renderListBoards();
-    changeId(boardId);
-  } else {
-    window.location.href = "../pages/index.html";
-  }
-});
+
 btnCancelCloseBoard.addEventListener("click", function () {
   modalCloseBoard.classList.remove("displayModalCloseBoard");
   overlayModal.classList.remove("show");
@@ -721,3 +738,48 @@ function removeSelectLabel(){
     label.classList.remove("labelSelected");
   })
 }
+
+
+function showModalClose(){
+  if(typeClose=="closeBoard"){
+    btnAngreeCLoseBoard.textContent="Yes, close it!"
+  } else if(typeClose=="removeTask"){
+    btnAngreeCLoseBoard.textContent="Yes, remove it!";
+  }
+  modalCloseBoard.classList.add("displayModalCloseBoard");
+  overlayModal.classList.add("show");
+}
+
+btnAngreeCLoseBoard.addEventListener("click",function(){
+  if(typeClose=="closeBoard"){
+    let boardClosed = listBoards.find((element) => element.id == boardId);
+    boardClosed.is_closed = true;
+    modalCloseBoard.classList.remove("displayModalCloseBoard");
+    overlayModal.classList.remove("show");
+    listBoards = user.boards.filter((board) => board.is_closed !== true);
+    saveData();
+    if (listBoards.length > 0) {
+      boardId = listBoards[0].id;
+      renderListBoards();
+      changeId(boardId);
+    } else {
+      window.location.href = "../pages/index.html";
+    }
+  } else if(typeClose=="removeTask"){
+    let boardCurrent = listBoards.find((element) => element.id == boardId);
+    let listCurrent = boardCurrent.lists.find((element) => element.id == listId);
+    let taskIndex = listCurrent.tasks.findIndex(element => element.id == taskId);
+    modalCloseBoard.classList.remove("displayModalCloseBoard");
+    overlayModal.classList.remove("show");
+    if (taskIndex !== -1) {
+      listCurrent.tasks.splice(taskIndex, 1);
+      showMessageComplete();
+      saveData();
+      changeId(boardId);
+    } else {
+      showMessageErorr("Không tìm thấy id task");
+    }
+  } else if(typeClose=="removeList"){
+
+  }
+})
