@@ -20,9 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Có lỗi xảy ra khi khởi tạo CKEditor:", error);
     });
 });
-
+let currentStatusFilter = null;
+let currentDateFilters = [];
+let currentKeyword = "";
 let overlayModal = document.querySelector(".overlayModal");
 let overlayModal2 = document.querySelector(".overlayModal2");
+let overlayModal3 = document.querySelector(".overlayModal3");
 let modalCloseBoard = document.querySelector(".modalCloseBoard");
 let modalDetail = document.querySelector(".modalDetail");
 
@@ -31,8 +34,11 @@ let titleBoardDetail = document.querySelector(".titleBoardDetail");
 let textSelectDetail = document.querySelector(".textSelectDetail");
 let saveDetail = document.querySelector(".saveDetail");
 let cancelDetail = document.querySelector(".cancelDetail");
-let labelId=0;
-
+let tempTags = [];
+let labelId = 0;
+let typeLabel = null;
+let labelEditId = 0;
+let totalTag = null;
 let typeClose = null;
 
 let errorMessage = document.querySelector(".errorMessage");
@@ -42,7 +48,6 @@ let successSignIn = document.querySelector(".successSignIn");
 
 let listBoards = user.boards.filter((board) => board.is_closed != true);
 let listYourBoards = document.querySelector(".listYourBoards");
-
 function renderListBoards() {
   listBoards = user.boards.filter((board) => board.is_closed != true);
 
@@ -83,7 +88,6 @@ function renderListBoards() {
 let mainBoard = document.querySelector(".mainBoard");
 let headerBoard = document.querySelector(".headerBoard");
 function changeId(newId) {
-
   boardId = newId;
   let board = listBoards.find((element) => element.id == boardId);
 
@@ -146,64 +150,91 @@ function changeId(newId) {
 
   let btncloseBoard = headerBoard.querySelector(".btncloseBoard");
   btncloseBoard.addEventListener("click", function () {
-    typeClose="closeBoard";
+    typeClose = "closeBoard";
     showModalClose();
   });
 
+  let block2 = document.querySelector(".block2");
+  block2.addEventListener("click", function () {
+    modalFilter.classList.add("displayModalFilter");
+    overlayModal.classList.add("show");
+  });
+
   mainBoard.innerHTML = `<div class="addListCard">
-  <input type="text" class="inputAddCard" placeholder="Add another list">
-  <img class="iconAddCard" src="../css/data/icons/plus-board.png" alt="">
-  <button class="btnAddCard">Add</button>
-</div>`;
+            <div class="block1AddList">
+              <img
+                class="iconAddCard"
+                src="../css/data/icons/plus-board.png"
+                alt=""
+              />
+              <span class="textFooterTask">Add another list</span>
+            </div>
+            <div class="block2AddList">
+              <input class="inputAddList" type="text" placeholder="Enter list name…">
+              <div class="blockAddList">
+                <button class="btnAddList">Add list</button>
+                <span class="closeAddList">
+                  <img src="../css/data/icons/close-add-a-card-board.png" alt="">
+                </span>
+              </div>
+            </div>
+          </div>`;
 
   let addListCard = mainBoard.querySelector(".addListCard");
+  let block1AddList = addListCard.querySelector(".block1AddList");
+  let block2AddList = addListCard.querySelector(".block2AddList");
+
   let clickList = 0;
   addListCard.addEventListener("click", function () {
     clickList++;
-    if(clickList===1){
-      let inputAddCard = addListCard.querySelector(".inputAddCard");
-    let btnAddCard = addListCard.querySelector(".btnAddCard");
-    let iconAddCard = addListCard.querySelector(".iconAddCard");
-    let btnCloseError = errorMessage.querySelector(".btnCloseError");
+    if (clickList === 1) {
+      let inputAddList = addListCard.querySelector(".inputAddList");
+      let btnAddList = addListCard.querySelector(".btnAddList");
+      let closeAddList = addListCard.querySelector(".closeAddList");
 
-    inputAddCard.classList.add("displayTextFooterTask");
-    btnAddCard.classList.add("displayBtnAddCard");
-    iconAddCard.classList.add("displayIconAddCard");
+      block1AddList.style.display = "none";
+      block2AddList.style.display = "flex";
 
-    btnAddCard.addEventListener("click", function () {
-      textBodyError.innerHTML = ``;
-      let checkTitle = checkData(inputAddCard.value.trim(), "title");
-      if (checkTitle != "valid") {
-        let span = document.createElement("span");
-        span.className = "textDetailed";
-        span.textContent = `${checkTitle}`;
-        textBodyError.appendChild(span);
-        errorMessage.classList.add("displayMessage");
-        setTimeout(() => {
-          errorMessage.classList.remove("displayMessage");
-        }, 2000);
-        btnCloseError.addEventListener("click", function () {
-          errorMessage.classList.remove("displayMessage");
-        });
-      } else {
-        successSignIn.classList.add("displayMessage");
-        setTimeout(() => {
-          successSignIn.classList.remove("displayMessage");
-        }, 1000);
-        let newList = {
-          created_at: new Date().toISOString(),
-          id: 
-          board.lists.length > 0
-          ? board.lists[board.lists.length - 1].id + 1
-          : 201,
-          tasks: [],
-          title: inputAddCard.value.trim(),
-        };
-        board.lists.push(newList);
-        saveData();
+      closeAddList.addEventListener("click", function () {
+        block1AddList.style.display = "flex";
+        block2AddList.style.display = "none";
         changeId(boardId);
-      }
-    });
+      });
+
+      btnAddList.addEventListener("click", function () {
+        textBodyError.innerHTML = ``;
+        let checkTitle = checkData(inputAddList.value.trim(), "title");
+        if (checkTitle != "valid") {
+          let span = document.createElement("span");
+          span.className = "textDetailed";
+          span.textContent = `${checkTitle}`;
+          textBodyError.appendChild(span);
+          errorMessage.classList.add("displayMessage");
+          setTimeout(() => {
+            errorMessage.classList.remove("displayMessage");
+          }, 2000);
+          btnCloseError.addEventListener("click", function () {
+            errorMessage.classList.remove("displayMessage");
+          });
+        } else {
+          successSignIn.classList.add("displayMessage");
+          setTimeout(() => {
+            successSignIn.classList.remove("displayMessage");
+          }, 1000);
+          let newList = {
+            created_at: new Date().toISOString(),
+            id:
+              board.lists.length > 0
+                ? board.lists[board.lists.length - 1].id + 1
+                : 201,
+            tasks: [],
+            title: inputAddList.value.trim(),
+          };
+          board.lists.push(newList);
+          saveData();
+          changeId(boardId);
+        }
+      });
     }
   });
 
@@ -211,8 +242,10 @@ function changeId(newId) {
   lists.forEach((element) => {
     let listMainCard = document.createElement("div");
     listMainCard.className = "listMainCard";
+
     listMainCard.innerHTML = `<div class="headerMainCard">
               <p class="textMainCard">${element.title}</p>
+              <input type="text" class="inputEditList" value="${element.title}">
               <div class="iconsHeaderMainCard">
                 <img
                   class="collapseMainCard"
@@ -227,22 +260,62 @@ function changeId(newId) {
             <div class="listTasks">
             </div>
             <div class="footerTask">
+                <div class="block1Footer">
                 <img
                   class="iconPlusTask"
                   src="../css/data/icons/plus-board.png"
                   alt=""
                 />
-                <input class="textFooterTask" type="text" placeholder="Add a card"></input>
-              <div class="listAddCard">
-                <img
-                  class="iconListAddCard"
-                  src="../css/data/icons/list-addcard-board.png"
-                  alt=""
-                />
+                <span class="textFooterTask">Add a card</span>
+                <div class="btnDeleteList">
+                  <img
+                    class="iconbtnDeleteList"
+                    src="../css/data/icons/list-addcard-board.png"
+                    alt=""
+                  />
+                </div>
               </div>
-              <button class="btnAddACard">Add</button>
+              <div class="block2Footer">
+                <textarea class="inputAddACard" placeholder="Enter a title or paste a link"></textarea>
+                <div class="blockAddCard">
+                  <button class="btnAddACard">Add card</button>
+                  <span class="closeAddACard">
+                    <img src="../css/data/icons/close-add-a-card-board.png" alt="">
+                  </span>
+                </div>
+              </div>
             </div>`;
 
+            
+    // Logic chỉnh sửa list
+    let headerMainCard = listMainCard.querySelector(".headerMainCard");
+    headerMainCard.addEventListener("click", function () {
+      let textMainCard = headerMainCard.querySelector(".textMainCard");
+      let inputEditList = headerMainCard.querySelector(".inputEditList");
+      textMainCard.style.display = "none";
+      inputEditList.style.display = "block";
+      inputEditList.focus();
+    });
+
+    let inputEditList = headerMainCard.querySelector(".inputEditList");
+    inputEditList.addEventListener("blur", function () {
+      let newTitle = inputEditList.value.trim();
+      let checkTitle = checkData(newTitle, "title");
+
+      if (checkTitle !== "valid") {
+        showMessageErorr(checkTitle);
+        inputEditList.value = element.title;
+      } else if(element.title !==newTitle){
+        element.title = newTitle;
+        showMessageComplete();
+        saveData();
+      }
+
+      let textMainCard = headerMainCard.querySelector(".textMainCard");
+      textMainCard.textContent = element.title;
+      textMainCard.style.display = "block";
+      inputEditList.style.display = "none";
+    });
 
     // Logic hiện các task
     let listTasks = listMainCard.querySelector(".listTasks");
@@ -250,21 +323,23 @@ function changeId(newId) {
     taskGroup.forEach((task) => {
       let taskInfo = document.createElement("div");
       taskInfo.className = "taskInfo";
+      taskInfo.setAttribute("data-status", task.status);
+      taskInfo.setAttribute("data-due-date", task.due_date || "");
       taskInfo.innerHTML = `
       ${
         task.status == "pending"
-          ? `<span class="textTask">${task.title}</span> <span class="iconCloseTask">✖️</span>`
-          : `<img class="iconCompleteTask" src="../css/data/icons/complete-board.png" alt=""/> <span class="textTask textTaskComplete">${task.title}</span> <span class="iconCloseTask">✖️</span>`
+          ? `<span class="textTask">${task.title}</span>`
+          : `<img class="iconCompleteTask" src="../css/data/icons/complete-board.png" alt=""/> <span class="textTask textTaskComplete">${task.title}</span>`
       }`;
 
-
       // Logic ấn vào từng task
-      taskInfo.addEventListener("click",function(){
+      taskInfo.addEventListener("click", function () {
         modalDetail.classList.add("displayModalDetail");
         overlayModal.classList.add("show");
         taskId = task.id;
         listId = element.id;
-        if(task.status == "pending"){
+        tempTags = [...task.tag];
+        if (task.status == "pending") {
           checkStatusDetail.checked = false;
         } else {
           checkStatusDetail.checked = true;
@@ -272,78 +347,79 @@ function changeId(newId) {
         titleBoardDetail.textContent = task.title;
         textSelectDetail.textContent = element.title;
         myEditor.setData(`${task.description}`);
-      })
-
-      let iconCloseTask = taskInfo.querySelector(".iconCloseTask");
-
-      taskInfo.addEventListener("mouseover", function () {
-          iconCloseTask.style.display = "flex";
-      });
-    
-      taskInfo.addEventListener("mouseout", function () {
-          iconCloseTask.style.display = "none";
+        renderLabel();
       });
 
-      iconCloseTask.addEventListener("click",function(event){
-        event.stopPropagation();
-        taskId = task.id;
-        listId = element.id;
-        typeClose="removeTask";
+      let deleteTask = document.querySelector(".deleteTask");
+
+      deleteTask.addEventListener("click", function () {
+        typeClose = "removeTask";
         showModalClose();
-      })
-
-
+      });
 
       listTasks.appendChild(taskInfo);
     });
 
-    
-
     // Logic thêm 1 task mới
     let addCard = listMainCard.querySelector(".footerTask");
-    let clickTask =0;
+    let block1Footer = addCard.querySelector(".block1Footer");
+    let block2Footer = addCard.querySelector(".block2Footer");
+
+    let clickTask = 0;
     addCard.addEventListener("click", function () {
       clickTask++;
-      console.log(clickTask);
-      
-      if(clickTask===1){
-        let inputCard = addCard.querySelector(".textFooterTask");
-      let btnAddACard = addCard.querySelector(".btnAddACard");
-      let iconPlusTask = addCard.querySelector(".iconPlusTask");
+      if (clickTask === 1) {
+        block1Footer.style.display = "none";
+        block2Footer.style.display = "block";
 
-      inputCard.classList.add("displayTextFooterTask");
-      btnAddACard.classList.add("displayBtnAddACard");
-      iconPlusTask.classList.add("displayIconPlusTask");
+        let inputCard = addCard.querySelector(".inputAddACard");
+        let btnAddACard = addCard.querySelector(".btnAddACard");
+        let closeAddACard = addCard.querySelector(".closeAddACard");
 
-      btnAddACard.addEventListener("click", function () {
-        textBodyError.innerHTML = ``;
-        let checkTitle = checkData(inputCard.value.trim(), "title");
-        if (checkTitle != "valid") {
-          showMessageErorr(checkTitle);
-        } else {
-          showMessageComplete();
-          let newTask = {
-            created_at: new Date().toISOString(),
-            description: "",
-            due_date: false,
-            id: 
-            element.tasks.length > 0
-            ? element.tasks[element.tasks.length - 1].id + 1
-            : 301,
-            status: "pending",
-            tag: [],
-            title: inputCard.value.trim(),
-          };
-          element.tasks.push(newTask);
-          saveData();
+        closeAddACard.addEventListener("click", function () {
+          block1Footer.style.display = "flex";
+          block2Footer.style.display = "none";
           changeId(boardId);
-        }
-      });
+        });
+
+        btnAddACard.addEventListener("click", function () {
+          textBodyError.innerHTML = ``;
+          let checkTitle = checkData(inputCard.value.trim(), "title");
+          if (checkTitle != "valid") {
+            showMessageErorr(checkTitle);
+          } else {
+            showMessageComplete();
+            let newTask = {
+              created_at: new Date().toISOString(),
+              description: "",
+              due_date: false,
+              id:
+                element.tasks.length > 0
+                  ? element.tasks[element.tasks.length - 1].id + 1
+                  : 301,
+              status: "pending",
+              tag: [],
+              title: inputCard.value.trim(),
+            };
+            element.tasks.push(newTask);
+            saveData();
+            changeId(boardId);
+          }
+        });
       }
     });
 
+    // logic xóa list
+    let deleteList = listMainCard.querySelector(".btnDeleteList");
+    deleteList.addEventListener("click", function (event) {
+      event.stopPropagation();
+      listId = element.id;
+      typeClose = "removeList";
+      showModalClose();
+    });
     mainBoard.insertBefore(listMainCard, addListCard);
   });
+  applyFilter();
 }
 
 // Logic thay đổi màu ô starred
@@ -366,6 +442,7 @@ let btnCancelCloseBoard = document.querySelector(".btnCancelCloseBoard");
 btnCancelCloseBoard.addEventListener("click", function () {
   modalCloseBoard.classList.remove("displayModalCloseBoard");
   overlayModal.classList.remove("show");
+  overlayModal2.classList.remove("show");
 });
 
 let boardsSidebar = document.querySelector(".boardsSidebar");
@@ -388,33 +465,28 @@ closeBoards.addEventListener("click", function () {
   window.location.href = "../pages/index.html";
 });
 
-
-
-
-
 // Logic từng task
 
+cancelDetail.addEventListener("click", function () {
+  modalDetail.classList.remove("displayModalDetail");
+  overlayModal.classList.remove("show");
+});
 
- cancelDetail.addEventListener("click",function(){
-    modalDetail.classList.remove("displayModalDetail");
-    overlayModal.classList.remove("show");
- })
-
- saveDetail.addEventListener("click",function(){
+saveDetail.addEventListener("click", function () {
   let board = listBoards.find((element) => element.id == boardId);
   let totalList = [...board.lists];
-  
-  let listInfo = totalList.find(list => list.id == listId);
+
+  let listInfo = totalList.find((list) => list.id == listId);
   let totalTask = [...listInfo.tasks];
 
-  let taskInfo = totalTask.find(task => task.id == taskId);
-  
+  let taskInfo = totalTask.find((task) => task.id == taskId);
+
   let taskToUpdate = taskInfo;
 
   if (tempId && tempId !== listId) {
-    let listMove = totalList.find(list => list.id == tempId);
+    let listMove = totalList.find((list) => list.id == tempId);
     if (listMove) {
-      listInfo.tasks = listInfo.tasks.filter(task => task.id !== taskId);
+      listInfo.tasks = listInfo.tasks.filter((task) => task.id !== taskId);
 
       let taskToMove = { ...taskInfo };
       if (listMove.tasks.length === 0) {
@@ -432,32 +504,33 @@ closeBoards.addEventListener("click", function () {
     }
   }
 
-  let checkDescription = checkData(myEditor.getData(),"description");
-  if(checkDescription !== "valid"){
+  let checkDescription = checkData(myEditor.getData(), "description");
+  if (checkDescription !== "valid") {
     showMessageErorr(checkDescription);
   } else {
     showMessageComplete();
     taskToUpdate.description = myEditor.getData();
-    if(checkStatusDetail.checked){
+    if (checkStatusDetail.checked) {
       taskToUpdate.status = "complete";
     } else {
       taskToUpdate.status = "pending";
     }
-    if(startDateISO){
+    if (startDateISO) {
       taskToUpdate.created_at = startDateISO;
     } else {
       taskToUpdate.created_at = new Date().toISOString();
     }
     taskToUpdate.due_date = dueDateISO;
-    labelId=0;
+    taskToUpdate.tag = [...tempTags];
+    labelId = 0;
     showMessageComplete();
     modalDetail.classList.remove("displayModalDetail");
     overlayModal.classList.remove("show");
     saveData();
     changeId(boardId);
   }
- });
- 
+});
+
 //  logic In List
 let selectModalDetail = document.querySelector(".selectModalDetail");
 let modalMove = document.querySelector(".modalMove");
@@ -467,111 +540,138 @@ let listMoveCard = document.querySelector(".listMoveCard");
 let btnMoveCard = document.querySelector(".btnMoveCard");
 let labelEdit = document.querySelector(".labelEdit");
 let modalCreateLabel = document.querySelector(".modalCreateLabel");
+let textHeaderCreateLabel = modalCreateLabel.querySelector(
+  ".textHeaderCreateLabel"
+);
+let btnDeleteLabel = modalCreateLabel.querySelector(".btnDeleteLabel");
+let btnCreateLabel = document.querySelector(".btnCreateLabel");
+
+let modalLabel = document.querySelector(".modalLabel");
+let btnLabel = document.querySelector(".btnLabel");
 let closeCreateLabel = document.querySelector(".closeCreateLabel");
 let returnCreateLabel = document.querySelector(".returnCreateLabel");
 let inputTitleLabel = document.querySelector(".inputTitleLabel");
-let btnCreateLabel = document.querySelector(".btnCreateLabel");
+let closeLabel = document.querySelector(".closeLabel");
 let tempId = null;
 
-
-selectModalDetail.addEventListener("click",function(){
-  listMoveCard.innerHTML=``;
+selectModalDetail.addEventListener("click", function () {
+  listMoveCard.innerHTML = ``;
   let board = listBoards.find((element) => element.id == boardId);
   let totalList = [...board.lists];
-  
-  let listInfo = totalList.find(list => list.id == listId);
+
+  let listInfo = totalList.find((list) => list.id == listId);
   let totalTask = [...listInfo.tasks];
 
-  let taskInfo = totalTask.find(task => task.id == taskId);
+  let taskInfo = totalTask.find((task) => task.id == taskId);
   modalMove.classList.add("displayModalMoveCard");
   overlayModal2.classList.add("show");
-  inputBoardMove.value=`${listInfo.title}`;
+  inputBoardMove.value = `${listInfo.title}`;
 
-  totalList.forEach(list => {
+  totalList.forEach((list) => {
     let option = document.createElement("option");
     option.value = list.title;
     option.textContent = list.title;
-    if(list.id == listInfo.id){
+    if (list.id == listInfo.id) {
       option.selected = true;
     }
     listMoveCard.appendChild(option);
   });
-})
+});
 
-
-btnCloseMoveCard.addEventListener("click",function(){
+btnCloseMoveCard.addEventListener("click", function () {
   modalMove.classList.remove("displayModalMoveCard");
   overlayModal2.classList.remove("show");
-})
+});
 
-
-btnMoveCard.addEventListener("click",function(){
+btnMoveCard.addEventListener("click", function () {
   let board = listBoards.find((element) => element.id == boardId);
   let totalList = [...board.lists];
-  let listMove = totalList.find(list => list.title == listMoveCard.value);
-    tempId = listMove.id;
-    textSelectDetail.textContent = listMove.title;
-    modalMove.classList.remove("displayModalMoveCard");
-    overlayModal2.classList.remove("show");
-})
+  let listMove = totalList.find((list) => list.title == listMoveCard.value);
+  tempId = listMove.id;
+  textSelectDetail.textContent = listMove.title;
+  modalMove.classList.remove("displayModalMoveCard");
+  overlayModal2.classList.remove("show");
+});
 
-
-labelEdit.addEventListener("click",function(){
-  modalCreateLabel.classList.add("displayModalCreateLabel");
+labelEdit.addEventListener("click", function () {
+  labelId = 0;
+  modalLabel.classList.add("displayModalLabel");
   overlayModal2.classList.add("show");
+  renderLabel();
+});
+
+btnLabel.addEventListener("click", function () {
+  overlayModal3.classList.add("show");
+  modalCreateLabel.classList.add("displayModalCreateLabel");
   removeSelectLabel();
-  inputTitleLabel.value ="";
-})
+  inputTitleLabel.value = "";
+  textHeaderCreateLabel.textContent = "Create label";
+  btnDeleteLabel.classList.remove("showBtnDeteleLabel");
+  btnCreateLabel.textContent = "Create";
+  typeLabel = "create";
+});
 
-closeCreateLabel.addEventListener("click", function(){
+closeLabel.addEventListener("click", function () {
+  modalLabel.classList.remove("displayModalLabel");
+  overlayModal2.classList.remove("show");
+});
+
+closeCreateLabel.addEventListener("click", function () {
+  modalCreateLabel.classList.remove("displayModalCreateLabel");
+  overlayModal3.classList.remove("show");
+});
+
+returnCreateLabel.addEventListener("click", function () {
   modalCreateLabel.classList.remove("displayModalCreateLabel");
   overlayModal2.classList.remove("show");
-})
+});
 
-returnCreateLabel.addEventListener("click", function(){
-  modalCreateLabel.classList.remove("displayModalCreateLabel");
-  overlayModal2.classList.remove("show");
-})
-
-btnCreateLabel.addEventListener("click",function(){
-  let board = listBoards.find((element) => element.id == boardId);
-  let totalList = [...board.lists];
-  
-  let listInfo = totalList.find(list => list.id == listId);
-  let totalTask = [...listInfo.tasks];
-
-  let taskInfo = totalTask.find(task => task.id == taskId);
-  let totalTag = [...taskInfo.tag];
-  
-  
-  let checkTitle = checkData(inputTitleLabel.value,"title")
-  if(checkTitle=="valid"){
-    showMessageComplete();
-    let newTag = {
-      id: 
-      totalTag.length > 0
-      ? totalTag[totalTag.length - 1].id + 1
-      : 401,
-      content: inputTitleLabel.value,
-      color: dataColorLabel[labelId]
-    };
-    totalTag.push(newTag);
-    modalCreateLabel.classList.remove("displayModalCreateLabel");
-  overlayModal2.classList.remove("show");
-  } else {
-    showMessageErorr(checkTitle);
+btnCreateLabel.addEventListener("click", function () {
+  if (typeLabel == "create") {
+    let checkTitle = checkData(inputTitleLabel.value, "title");
+    if (checkTitle == "valid") {
+      showMessageComplete();
+      let newTag = {
+        id: totalTag.length > 0 ? totalTag[totalTag.length - 1].id + 1 : 401,
+        content: inputTitleLabel.value,
+        color: dataColorLabel[labelId],
+      };
+      tempTags.push(newTag);
+      modalCreateLabel.classList.remove("displayModalCreateLabel");
+      overlayModal3.classList.remove("show");
+      renderLabel();
+    } else {
+      showMessageErorr(checkTitle);
+    }
+  } else if (typeLabel == "edit") {
+    let checkTitle = checkData(inputTitleLabel.value, "title");
+    if (checkTitle == "valid") {
+      let tagCurrent = tempTags.find((tag) => tag.id == labelEditId);
+      tagCurrent.content = inputTitleLabel.value;
+      tagCurrent.color = dataColorLabel[labelId];
+      modalCreateLabel.classList.remove("displayModalCreateLabel");
+      overlayModal3.classList.remove("show");
+      renderLabel();
+    } else {
+      showMessageErorr(checkTitle);
+    }
   }
-})
+});
+
+btnDeleteLabel.addEventListener("click", function () {
+  typeClose = "removeTag";
+  showModalClose();
+});
 
 let colorLabel = document.querySelectorAll(".colorLabel");
-  colorLabel.forEach((label, index) => {
-    label.addEventListener("click",function(){
-      removeSelectLabel();
-      labelId = index;
-      this.classList.add("labelSelected");
-    });
+colorLabel.forEach((label, index) => {
+  label.addEventListener("click", function () {
+    let iconSelectedLabel = label.querySelector(".selectedLabel");
+    removeSelectLabel();
+    labelId = index;
+    iconSelectedLabel.classList.add("labelSelected");
   });
-
+});
 
 // Logic Modal Date
 let currentField = "startDate";
@@ -582,7 +682,6 @@ let btnRemoveModalDate = document.querySelector(".btnRemoveModalDate");
 let btnSaveModalDate = document.querySelector(".btnSaveModalDate");
 let startDateISO = null;
 let dueDateISO = null;
-
 
 function initializeCalendar(enableTime = false) {
   if (calendar) {
@@ -607,16 +706,16 @@ function initializeCalendar(enableTime = false) {
 
 // Lấy các giá trị
 function parseDateString(dateStr, hasTime = false) {
-  const parts = dateStr.split(" ");
-  const dateParts = parts[0].split("/");
-  const day = parseInt(dateParts[0], 10);
-  const month = parseInt(dateParts[1], 10) - 1;
-  const year = parseInt(dateParts[2], 10);
+  let parts = dateStr.split(" ");
+  let dateParts = parts[0].split("/");
+  let day = parseInt(dateParts[0], 10);
+  let month = parseInt(dateParts[1], 10) - 1;
+  let year = parseInt(dateParts[2], 10);
 
   if (hasTime && parts.length > 1) {
-    const timeParts = parts[1].split(":");
-    const hours = parseInt(timeParts[0], 10);
-    const minutes = parseInt(timeParts[1], 10);
+    let timeParts = parts[1].split(":");
+    let hours = parseInt(timeParts[0], 10);
+    let minutes = parseInt(timeParts[1], 10);
     return new Date(year, month, day, hours, minutes);
   } else {
     return new Date(year, month, day);
@@ -635,11 +734,9 @@ document.getElementById("dueDateCheck").addEventListener("change", function () {
 });
 
 document.querySelector(".dateEdit").addEventListener("click", function () {
-
   let board = listBoards.find((element) => element.id == boardId);
-  let listInfo = board.lists.find(list => list.id == listId);
-  let taskInfo = listInfo.tasks.find(task => task.id == taskId);
-
+  let listInfo = board.lists.find((list) => list.id == listId);
+  let taskInfo = listInfo.tasks.find((task) => task.id == taskId);
 
   overlayModal2.classList.add("show");
   modalDate.classList.add("displayModalDate");
@@ -648,13 +745,13 @@ document.querySelector(".dateEdit").addEventListener("click", function () {
   document.getElementById("dueDate").value = "";
 
   if (taskInfo.created_at) {
-    const startDate = new Date(taskInfo.created_at);
-    const day = String(startDate.getDate()).padStart(2, "0");
-    const month = String(startDate.getMonth() + 1).padStart(2, "0");
-    const year = startDate.getFullYear();
+    let startDate = new Date(taskInfo.created_at);
+    let day = String(startDate.getDate()).padStart(2, "0");
+    let month = String(startDate.getMonth() + 1).padStart(2, "0");
+    let year = startDate.getFullYear();
     document.getElementById("startDate").value = `${day}/${month}/${year}`;
   } else {
-    const today = new Date();
+    let today = new Date();
     const day = String(today.getDate()).padStart(2, "0");
     const month = String(today.getMonth() + 1).padStart(2, "0");
     const year = today.getFullYear();
@@ -668,7 +765,9 @@ document.querySelector(".dateEdit").addEventListener("click", function () {
     const year = dueDate.getFullYear();
     const hours = String(dueDate.getHours()).padStart(2, "0");
     const minutes = String(dueDate.getMinutes()).padStart(2, "0");
-    document.getElementById("dueDate").value = `${day}/${month}/${year} ${hours}:${minutes}`;
+    document.getElementById(
+      "dueDate"
+    ).value = `${day}/${month}/${year} ${hours}:${minutes}`;
     document.getElementById("dueDateCheck").checked = true; // Chọn checkbox nếu có dueDate
   } else {
     document.getElementById("dueDate").value = "";
@@ -681,10 +780,9 @@ document.querySelector(".dateEdit").addEventListener("click", function () {
     currentField = "startDate";
     initializeCalendar(false);
   }
-
 });
 
-btnSaveModalDate.addEventListener("click",function(){
+btnSaveModalDate.addEventListener("click", function () {
   const startDateStr = document.getElementById("startDate").value;
   const startDate = parseDateString(startDateStr, false);
   startDateISO = startDate.toISOString();
@@ -697,21 +795,19 @@ btnSaveModalDate.addEventListener("click",function(){
   }
   overlayModal2.classList.remove("show");
   modalDate.classList.remove("displayModalDate");
-})
+});
 
-
-btnCloseModalDate.addEventListener("click",function(){
+btnCloseModalDate.addEventListener("click", function () {
   overlayModal2.classList.remove("show");
   modalDate.classList.remove("displayModalDate");
 });
-btnRemoveModalDate.addEventListener("click",function(){
+btnRemoveModalDate.addEventListener("click", function () {
   overlayModal2.classList.remove("show");
   modalDate.classList.remove("displayModalDate");
 });
 
-
- function showMessageErorr(value){
-  textBodyError.innerHTML =``;
+function showMessageErorr(value) {
+  textBodyError.innerHTML = ``;
   let span = document.createElement("span");
   span.className = "textDetailed";
   span.textContent = `${value}`;
@@ -723,39 +819,43 @@ btnRemoveModalDate.addEventListener("click",function(){
   btnCloseError.addEventListener("click", function () {
     errorMessage.classList.remove("displayMessage");
   });
- }
-
- function showMessageComplete(){
-  successSignIn.classList.add("displayMessage");
-          setTimeout(() => {
-            successSignIn.classList.remove("displayMessage");
-          }, 1000);
- }
-
-function removeSelectLabel(){
-  let colorLabel = document.querySelectorAll(".colorLabel");
-  colorLabel.forEach(label => {
-    label.classList.remove("labelSelected");
-  })
 }
 
+function showMessageComplete() {
+  successSignIn.classList.add("displayMessage");
+  setTimeout(() => {
+    successSignIn.classList.remove("displayMessage");
+  }, 1000);
+}
 
-function showModalClose(){
-  if(typeClose=="closeBoard"){
-    btnAngreeCLoseBoard.textContent="Yes, close it!"
-  } else if(typeClose=="removeTask"){
-    btnAngreeCLoseBoard.textContent="Yes, remove it!";
+function removeSelectLabel() {
+  let selectedLabel = document.querySelectorAll(".selectedLabel");
+  selectedLabel.forEach((label) => {
+    label.classList.remove("labelSelected");
+  });
+}
+
+function showModalClose() {
+  if (typeClose == "closeBoard") {
+    btnAngreeCLoseBoard.textContent = "Yes, close it!";
+  } else if (
+    typeClose == "removeTask" ||
+    typeClose == "removeList" ||
+    typeClose == "removeTag"
+  ) {
+    btnAngreeCLoseBoard.textContent = "Yes, delete it!";
   }
   modalCloseBoard.classList.add("displayModalCloseBoard");
-  overlayModal.classList.add("show");
+  overlayModal2.classList.add("show");
 }
 
-btnAngreeCLoseBoard.addEventListener("click",function(){
-  if(typeClose=="closeBoard"){
+btnAngreeCLoseBoard.addEventListener("click", function () {
+  if (typeClose == "closeBoard") {
     let boardClosed = listBoards.find((element) => element.id == boardId);
     boardClosed.is_closed = true;
+    boardClosed.is_starred = false;
     modalCloseBoard.classList.remove("displayModalCloseBoard");
-    overlayModal.classList.remove("show");
+    overlayModal2.classList.remove("show");
     listBoards = user.boards.filter((board) => board.is_closed !== true);
     saveData();
     if (listBoards.length > 0) {
@@ -765,12 +865,18 @@ btnAngreeCLoseBoard.addEventListener("click",function(){
     } else {
       window.location.href = "../pages/index.html";
     }
-  } else if(typeClose=="removeTask"){
+  } else if (typeClose == "removeTask") {
     let boardCurrent = listBoards.find((element) => element.id == boardId);
-    let listCurrent = boardCurrent.lists.find((element) => element.id == listId);
-    let taskIndex = listCurrent.tasks.findIndex(element => element.id == taskId);
+    let listCurrent = boardCurrent.lists.find(
+      (element) => element.id == listId
+    );
+    let taskIndex = listCurrent.tasks.findIndex(
+      (element) => element.id == taskId
+    );
     modalCloseBoard.classList.remove("displayModalCloseBoard");
+    overlayModal2.classList.remove("show");
     overlayModal.classList.remove("show");
+    modalDetail.classList.remove("displayModalDetail");
     if (taskIndex !== -1) {
       listCurrent.tasks.splice(taskIndex, 1);
       showMessageComplete();
@@ -779,7 +885,163 @@ btnAngreeCLoseBoard.addEventListener("click",function(){
     } else {
       showMessageErorr("Không tìm thấy id task");
     }
-  } else if(typeClose=="removeList"){
-
+  } else if (typeClose == "removeList") {
+    let boardCurrent = listBoards.find((element) => element.id == boardId);
+    let listIndex = boardCurrent.lists.findIndex(
+      (element) => element.id == listId
+    );
+    modalCloseBoard.classList.remove("displayModalCloseBoard");
+    overlayModal2.classList.remove("show");
+    if (listIndex !== -1) {
+      boardCurrent.lists.splice(listIndex, 1);
+      showMessageComplete();
+      saveData();
+      changeId(boardId);
+    } else {
+      showMessageErorr("Không tìm thấy id list");
+    }
+  } else if (typeClose == "removeTag") {
+    tempTags = tempTags.filter((tag) => tag.id !== labelEditId);
+    renderLabel();
+    showMessageComplete();
+    modalCloseBoard.classList.remove("displayModalCloseBoard");
+    modalCreateLabel.classList.remove("displayModalCreateLabel");
+    overlayModal3.classList.remove("show");
   }
-})
+});
+
+let listLabel = document.querySelector(".listLabel");
+
+function renderLabel() {
+  listLabel.innerHTML = "";
+  totalTag = [...tempTags];
+
+  totalTag.forEach((tag) => {
+    let labelInfo = document.createElement("div");
+    labelInfo.innerHTML = `
+    <div class="labelInfo">
+          <input class="checkboxLabel" type="checkbox" name="label" />
+          <span class="labelColor">${tag.content}</span>
+          <span class="editLabel">
+            <img src="../css/data/icons/edit-label-board.png" alt="">
+          </span>
+    </div>`;
+    let labelColor = labelInfo.querySelector(".labelColor");
+    labelColor.style.background = `${tag.color}`;
+    let editLabel = labelInfo.querySelector(".editLabel");
+
+    editLabel.addEventListener("click", function () {
+      labelEditId = tag.id;
+      typeLabel = "edit";
+      modalCreateLabel.classList.add("displayModalCreateLabel");
+      overlayModal3.classList.add("show");
+      textHeaderCreateLabel.textContent = "Edit label";
+      btnCreateLabel.textContent = "Save";
+      btnDeleteLabel.classList.add("showBtnDeteleLabel");
+      inputTitleLabel.value = `${tag.content}`;
+      removeSelectLabel();
+      let indexColorLabel = dataColorLabel.indexOf(tag.color);
+      labelId = indexColorLabel;
+      let iconSelectedLabel =
+        colorLabel[indexColorLabel].querySelector(".selectedLabel");
+      iconSelectedLabel.classList.add("labelSelected");
+    });
+
+    listLabel.appendChild(labelInfo);
+  });
+}
+
+let modalFilter = document.querySelector(".modalFilter");
+let btnCloseFilter = document.querySelector(".btnCloseFilter");
+
+btnCloseFilter.addEventListener("click", function () {
+  modalFilter.classList.remove("displayModalFilter");
+  overlayModal.classList.remove("show");
+});
+
+let checkboxStatus = document.querySelectorAll(
+  '.checkboxFilter[name="filterStatus"]'
+);
+checkboxStatus.forEach((checkbox) => {
+  checkbox.addEventListener("change", function () {
+    if (this.checked) {
+      checkboxStatus.forEach((cb) => {
+        if (cb !== this) {
+          cb.checked = false;
+        }
+      });
+      currentStatusFilter = this.value;
+    } else {
+      currentStatusFilter = null;
+    }
+    applyFilter();
+  });
+});
+
+let inputSearch = document.querySelector(".inputSearch");
+inputSearch.addEventListener("input", function () {
+  currentKeyword = this.value.trim().toLowerCase();
+  applyFilter();
+});
+
+let checkboxDueDate = document.querySelectorAll(
+  '.checkboxFilter[name="filterDueDate"]'
+);
+checkboxDueDate.forEach((checkbox) => {
+  checkbox.addEventListener("change", function () {
+    if (this.checked) {
+      currentDateFilters.push(this.value);
+    } else {
+      currentDateFilters = currentDateFilters.filter(
+        (val) => val !== this.value
+      );
+    }
+    applyFilter();
+  });
+});
+
+function applyFilter() {
+  let allTasks = document.querySelectorAll(".taskInfo");
+  let now = new Date();
+  let nextDay = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+
+  allTasks.forEach((task) => {
+    let taskStatus = task.getAttribute("data-status");
+
+    let taskTitle = task.querySelector(".textTask").textContent.toLowerCase();
+
+    let dueDateStr = task.getAttribute("data-due-date");
+    let dueDate = dueDateStr ? new Date(dueDateStr) : null;
+
+    task.style.display = "flex";
+
+    if (currentStatusFilter && taskStatus !== currentStatusFilter) {
+      task.style.display = "none";
+    }
+
+    if (currentKeyword && !taskTitle.includes(currentKeyword)) {
+      task.style.display = "none";
+    }
+
+    if (currentDateFilters.length > 0) {
+      let checkDisplay = false;
+      currentDateFilters.forEach((value) => {
+        if (value === "nodate" && !dueDate) {
+          checkDisplay = true;
+        } else if (value === "overdue" && dueDate && dueDate < now) {
+          checkDisplay = true;
+        } else if (
+          value === "duenextday" &&
+          dueDate &&
+          dueDate > now &&
+          dueDate <= nextDay
+        ) {
+          checkDisplay = true;
+        }
+      });
+      if (!checkDisplay) {
+        task.style.display = "none";
+      }
+    }
+  });
+}

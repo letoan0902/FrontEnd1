@@ -9,6 +9,10 @@ let textBodyError = document.querySelector(".textBodyError");
 
 let successSignIn = document.querySelector(".successSignIn");
 
+if(user){
+  window.location = "../pages/index.html";
+}
+
 btnSignIn.addEventListener("click", function () {
   let flag = 0;
   textBodyError.innerHTML = ``;

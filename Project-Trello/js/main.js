@@ -44,11 +44,24 @@ function renderBoard() {
       let editBoard = this.querySelector(".editBoard");
       editBoard.style.display = "flex";
       editBoard.addEventListener("click", function () {
-        backgroundId = -1;
         boardId = el.id;
         checkEditBoard = true;
         inputTitle.value = `${el.title}`;
         removeSelectedClass();
+
+        let currentBackground;
+        if (el.backdrop) {
+          currentBackground = el.backdrop;
+        } else if (el.color) {
+          currentBackground = el.color;
+        }
+        if (currentBackground) {
+          let currentIndex = dataBackgrounds.indexOf(currentBackground);
+          let selectedItem = allBackgroundItems[currentIndex];
+          let iconSelect = selectedItem.querySelector(".selectIconCreate");
+          iconSelect.classList.add("selectedModalCreate");
+          backgroundId=currentIndex;
+        }
 
         let noticeTitle = document.querySelector(".noticeTitle");
         noticeTitle.textContent = `👋 Please provide a valid board title.`;
@@ -125,11 +138,24 @@ function renderBoard() {
 
     let editBoard = boardInfoStarred.querySelector(".editBoard");
     editBoard.addEventListener("click", function () {
-      backgroundId = -1;
       boardId = el.id;
       checkEditBoard = true;
       inputTitle.value = `${el.title}`;
       removeSelectedClass();
+
+      let currentBackground;
+      if (el.backdrop) {
+        currentBackground = el.backdrop;
+      } else if (el.color) {
+        currentBackground = el.color;
+      }
+      if (currentBackground) {
+        let currentIndex = dataBackgrounds.indexOf(currentBackground);
+        let selectedItem = allBackgroundItems[currentIndex];
+        let iconSelect = selectedItem.querySelector(".selectIconCreate");
+        iconSelect.classList.add("selectedModalCreate");
+        backgroundId=currentIndex;
+      }
 
       let noticeTitle = document.querySelector(".noticeTitle");
       noticeTitle.textContent = `👋 Please provide a valid board title.`;
@@ -370,11 +396,24 @@ function renderStarredBoard() {
 
     let editBoard = boardInfoStarred.querySelector(".editBoard");
     editBoard.addEventListener("click", function () {
-      backgroundId = -1;
       boardId = el.id;
       checkEditBoard = true;
       inputTitle.value = `${el.title}`;
       removeSelectedClass();
+
+      let currentBackground;
+      if (el.backdrop) {
+        currentBackground = el.backdrop;
+      } else if (el.color) {
+        currentBackground = el.color;
+      }
+      if (currentBackground) {
+        let currentIndex = dataBackgrounds.indexOf(currentBackground);
+        let selectedItem = allBackgroundItems[currentIndex];
+        let iconSelect = selectedItem.querySelector(".selectIconCreate");
+        iconSelect.classList.add("selectedModalCreate");
+        backgroundId=currentIndex;
+      }
 
       let noticeTitle = document.querySelector(".noticeTitle");
       noticeTitle.textContent = `👋 Please provide a valid board title.`;
